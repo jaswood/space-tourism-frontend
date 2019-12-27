@@ -1,13 +1,10 @@
-<p>select-flight works!</p>
-<div>
-    <mat-form-field>
-        <mat-label>Spaceship</mat-label>
-        <mat-select [(value)]="selected.nameCode">
-            <mat-option value="ship.nameCode" *ngFor="let ship of spaceships; let i = index">
-                ship.nameCode;
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+<mat-form-field>
+    <mat-label>Spaceship</mat-label>
+    <mat-select placeholder="Spaceship" [(value)]="selectedShip">
+        <mat-option *ngFor="let ship of spaceships" [value]="ship.nameCode">
+            {{ship.nameCode}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
 
-    <p>You Selected: {{selected}}</p>
-</div>
+<p>You Selected: {{selectedShip}}</p>

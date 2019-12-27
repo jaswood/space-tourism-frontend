@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectFlightService } from './services/select-flight.service';
 import { Spaceship } from 'src/models/spaceship';
+import { SelectFlightService } from './services/select-flight.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-select-flight',
@@ -8,18 +9,15 @@ import { Spaceship } from 'src/models/spaceship';
   styleUrls: ['./select-flight.component.css']
 })
 export class SelectFlightComponent implements OnInit {
-    spaceships: Spaceship[];
+    spaceships: Spaceship[] = [];
+    selectedShip: String;
 
-  constructor(private selectFlightService: SelectFlightService) { }
+  constructor(private selectFlightService: SelectFlightService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log('ngoninit');
-    this.selectFlightService.getSpaceships().subscribe((res) => {
-      console.log('lala');
-      console.log(res);
-      this.spaceships = res;
-      console.log(this.spaceships);
-    });
+    this.spaceships = this.activatedRoute.snapshot.data['spaceships'];
+    console.log(this.spaceships);
 
   }
 

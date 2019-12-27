@@ -5,4 +5,5 @@ export class Spaceship {
     totalSeats: Number;
     maxSpeed: Number;
     age: Number;
+    noOfRows: Number;
 }
