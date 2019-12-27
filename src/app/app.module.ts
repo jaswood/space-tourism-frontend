@@ -7,11 +7,24 @@ import { AppComponent } from './app.component';
 import { SelectFlightComponent } from './select-flight/select-flight.component';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MessagesComponent } from './messages/messages.component';
+import { MatCardModule } from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+
+const MaterialModules = [
+  MatSelectModule,
+  MatFormFieldModule,
+  MatCardModule,
+  MatButtonModule
+]
 
 @NgModule({
   declarations: [
     AppComponent,
-    SelectFlightComponent
+    SelectFlightComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       {path: '', component: SelectFlightComponent}
     ]),
     BrowserAnimationsModule,
-    MatSelectModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

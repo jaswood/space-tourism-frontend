@@ -13,9 +13,14 @@ export class SelectFlightComponent implements OnInit {
   constructor(private selectFlightService: SelectFlightService) { }
 
   ngOnInit() {
+    console.log('ngoninit');
     this.selectFlightService.getSpaceships().subscribe((res) => {
+      console.log('lala');
+      console.log(res);
       this.spaceships = res;
+      console.log(this.spaceships);
     });
+
   }
 
 }
