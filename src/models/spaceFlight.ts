@@ -6,5 +6,6 @@ export class SpaceFlight {
     departureDate: Date;
     gate: string;
     flightNumber: string;
+    destination: string;
     leavingLocation: string;
 }

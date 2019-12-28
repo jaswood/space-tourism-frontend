@@ -13,16 +13,22 @@ import { MessagesComponent } from './messages/messages.component';
 import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { SelectFlightResolverService } from './select-flight/resolvers/select-flight-resolver';
+import { MatInputModule } from '@angular/material';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatListModule} from '@angular/material/list';
 
 const MaterialModules = [
   MatSelectModule,
   MatFormFieldModule,
   MatCardModule,
-  MatButtonModule
+  MatButtonModule,
+  MatInputModule,
+  MatGridListModule,
+  MatListModule
 ]
 
 const routes: Routes = [
-  {path: '', component: SelectFlightComponent, resolve: { spaceships: SelectFlightResolverService }}
+  {path: '', component: SelectFlightComponent, resolve: { data: SelectFlightResolverService }}
 ]
 
 @NgModule({

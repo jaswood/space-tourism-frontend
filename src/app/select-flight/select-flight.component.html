@@ -1,10 +1,34 @@
-<mat-form-field>
-    <mat-label>Spaceship</mat-label>
-    <mat-select placeholder="Spaceship" [(value)]="selectedShip">
-        <mat-option *ngFor="let ship of spaceships" [value]="ship.nameCode">
-            {{ship.nameCode}}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
+<mat-grid-list cols="3" rowHeight="300px">
+    <mat-grid-tile>
+        <mat-card>
+            <mat-form-field>
+                <mat-label>Spaceship</mat-label>
+                <mat-select placeholder="Spaceship" [(value)]="selectedShip">
+                    <mat-option *ngFor="let ship of spaceships" [value]="ship.nameCode">
+                        {{ship.nameCode}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
-<p>You Selected: {{selectedShip}}</p>
+            <p>You Selected: {{selectedShip}}</p>
+        </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-card>
+            <mat-form-field appearance="outline">
+                <mat-label>Destination</mat-label>
+                <input #dest (keyup)="destinationOnKey(dest.value)" matInput placeholder="Example: Moon">
+            </mat-form-field>
+            <p>{{destinationSearch}}</p>
+        </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-card>
+            <mat-list role="list">
+                <mat-list-item *ngFor="let flight of spaceFlights; let i = index" (click)="selectFlight()" role="listitem">{{flight.flightNumber}}</mat-list-item>
+            </mat-list>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
