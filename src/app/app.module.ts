@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
 import { FlightFilterPipe } from './pipes/flight-filter.pipe';
+import { FlightDetailsComponent } from './flight-details/flight-details.component';
 
 const MaterialModules = [
   MatSelectModule,
@@ -37,7 +38,8 @@ const routes: Routes = [
     AppComponent,
     SelectFlightComponent,
     MessagesComponent,
-    FlightFilterPipe
+    FlightFilterPipe,
+    FlightDetailsComponent
   ],
   imports: [
     BrowserModule,
