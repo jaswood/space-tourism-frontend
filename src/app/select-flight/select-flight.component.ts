@@ -15,6 +15,7 @@ export class SelectFlightComponent implements OnInit {
     spaceships: Spaceship[] = [];
     spaceFlights: SpaceFlight[] = [];
     listFilter: FlightSearch = new FlightSearch();
+    selectedFlight: SpaceFlight = new SpaceFlight();
 
   constructor(private selectFlightService: SelectFlightService,
     private activatedRoute: ActivatedRoute) { }
@@ -33,8 +34,8 @@ export class SelectFlightComponent implements OnInit {
     console.log(this.listFilter);
   }
 
-  selectFlight(index) {
-    console.log('hello');
+  selectFlight(flight: SpaceFlight) {
+    this.selectedFlight = flight;
   }
 
 }

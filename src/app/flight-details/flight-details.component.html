@@ -1,1 +1,22 @@
-<p>flight-details works!</p>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Selected Space Flight:</mat-card-title>
+        <mat-card-subtitle>Flight Details</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content *ngIf="spaceFlight != undefined">
+        <div>
+        <p><b>Flight:</b> {{spaceFlight.leavingLocation}} - {{spaceFlight.destination}}</p>
+        <br/>
+        <p><b>Flight Number:</b> {{spaceFlight.flightNumber}}</p>
+        <br />
+        <p><b>Flight Arrival/Destination Date:</b> {{spaceFlight.departureDate}} - {{spaceFlight.arrivalDate}}</p>
+        <br />
+        <p><b>Departure Gate:</b> {{spaceFlight.gate}}</p>
+        </div>
+        <mat-divider [inset]="true"></mat-divider>
+        
+    </mat-card-content>
+    <mat-card-actions *ngIf="showActions">
+        <button mat-raised-button>Book Tickets</button>
+    </mat-card-actions>
+</mat-card>

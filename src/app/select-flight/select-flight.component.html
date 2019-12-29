@@ -11,7 +11,7 @@
                 </mat-select>
             </mat-form-field>
 
-            <p>You Selected: {{listFilter.ship}}</p>
+            <p>Rocket Type: {{listFilter.ship}}</p>
         </mat-card>
     </mat-grid-tile>
 
@@ -21,7 +21,7 @@
                 <mat-label>Destination</mat-label>
                 <input #dest (keyup)="destinationOnKey(dest.value)" matInput placeholder="Example: Moon">
             </mat-form-field>
-            <p>{{listFilter.destination}}</p>
+            <p>Searching: {{listFilter.destination}}</p>
         </mat-card>
     </mat-grid-tile>
 
@@ -29,16 +29,21 @@
         <mat-card>
             <mat-label><u>Flights Available:</u></mat-label>
             <mat-list role="list">
-                <mat-list-item class="list-item" [disableRipple]="false" *ngFor="let flight of spaceFlights | FlightFilter:listFilter; let i = index" 
-                    (click)="selectFlight()" role="listitem">
+                <mat-list-item class="list-item" *ngFor="let flight of spaceFlights | FlightFilter:listFilter;" 
+                    (click)="selectFlight(flight)">
                     <div matLine>
                     <b>{{flight.destination}}</b>
                     </div>
                     <div matLine>
                     Flight Number: {{flight.flightNumber}}
                     </div>
+                    <mat-divider></mat-divider>
                 </mat-list-item>
             </mat-list>
         </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="3">
+        <app-flight-details [selectedFlight]="selectedFlight" [showActions]="true"></app-flight-details>
     </mat-grid-tile>
 </mat-grid-list>
