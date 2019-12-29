@@ -13,11 +13,8 @@ export class FlightDetailsComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.showActions);
-    console.log(this.spaceFlight);
   }
 
   ngOnChanges(){
-    console.log(this.spaceFlight)
   }
 }
