@@ -3,14 +3,15 @@
         <mat-card>
             <mat-form-field>
                 <mat-label>Spaceship</mat-label>
-                <mat-select placeholder="Spaceship" [(value)]="selectedShip">
+                <mat-select placeholder="Spaceship" [(value)]="listFilter.ship">
+                    <mat-option [value]="undefined">None</mat-option>
                     <mat-option *ngFor="let ship of spaceships" [value]="ship.nameCode">
                         {{ship.nameCode}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
 
-            <p>You Selected: {{selectedShip}}</p>
+            <p>You Selected: {{listFilter.ship}}</p>
         </mat-card>
     </mat-grid-tile>
 
@@ -20,14 +21,15 @@
                 <mat-label>Destination</mat-label>
                 <input #dest (keyup)="destinationOnKey(dest.value)" matInput placeholder="Example: Moon">
             </mat-form-field>
-            <p>{{destinationSearch}}</p>
+            <p>{{listFilter.destination}}</p>
         </mat-card>
     </mat-grid-tile>
 
     <mat-grid-tile>
         <mat-card>
             <mat-list role="list">
-                <mat-list-item *ngFor="let flight of spaceFlights; let i = index" (click)="selectFlight()" role="listitem">{{flight.flightNumber}}</mat-list-item>
+                <mat-list-item *ngFor="let flight of spaceFlights | FlightFilter:listFilter; let i = index" 
+                    (click)="selectFlight()" role="listitem">{{flight.flightNumber}}</mat-list-item>
             </mat-list>
         </mat-card>
     </mat-grid-tile>

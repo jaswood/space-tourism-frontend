@@ -16,6 +16,7 @@ import { SelectFlightResolverService } from './select-flight/resolvers/select-fl
 import { MatInputModule } from '@angular/material';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
+import { FlightFilterPipe } from './pipes/flight-filter.pipe';
 
 const MaterialModules = [
   MatSelectModule,
@@ -24,7 +25,7 @@ const MaterialModules = [
   MatButtonModule,
   MatInputModule,
   MatGridListModule,
-  MatListModule
+  MatListModule,
 ]
 
 const routes: Routes = [
@@ -35,7 +36,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     SelectFlightComponent,
-    MessagesComponent
+    MessagesComponent,
+    FlightFilterPipe
   ],
   imports: [
     BrowserModule,

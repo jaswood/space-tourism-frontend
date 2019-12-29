@@ -1,21 +1,20 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Spaceship } from 'src/models/spaceship';
 import { SelectFlightService } from './services/select-flight.service';
 import { ActivatedRoute } from '@angular/router';
 import { SpaceFlight } from 'src/models/spaceFlight';
-import { element } from 'protractor';
+import { FlightSearch } from 'src/models/flightSearch';
 
 @Component({
   selector: 'app-select-flight',
   templateUrl: './select-flight.component.html',
   styleUrls: ['./select-flight.component.css']
 })
-export class SelectFlightComponent implements OnInit, OnChanges {
+export class SelectFlightComponent implements OnInit {
 
     spaceships: Spaceship[] = [];
     spaceFlights: SpaceFlight[] = [];
-    selectedShip: String;
-    destinationSearch: String = '';
+    listFilter: FlightSearch = new FlightSearch();
 
   constructor(private selectFlightService: SelectFlightService,
     private activatedRoute: ActivatedRoute) { }
@@ -29,17 +28,9 @@ export class SelectFlightComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges() {
-    this.spaceFlights.filter(this.filterSpaceFlights);
-  }
-
-  filterSpaceFlights(flight, index, array) {
-    let flightDestination = flight.destination.split('');
-    let searchedDest = this.destinationSearch.split('');
-  }
-
   destinationOnKey(value: string) {
-    this.destinationSearch = value;
+    this.listFilter.destination = value;
+    console.log(this.listFilter);
   }
 
   selectFlight(index) {
