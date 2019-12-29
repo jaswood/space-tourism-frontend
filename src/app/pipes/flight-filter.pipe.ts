@@ -10,7 +10,6 @@ import { FlightSearch } from 'src/models/flightSearch';
 export class FlightFilterPipe implements PipeTransform {
     transform(flights: SpaceFlight[], filter: FlightSearch): any {
         //if items or filter is empty then return array
-        debugger;
         if (!flights || ((filter.destination == undefined || filter.destination == '') && filter.ship == undefined)) {
             return flights
         }
@@ -19,6 +18,7 @@ export class FlightFilterPipe implements PipeTransform {
     }
 
     spaceFilter(flight: SpaceFlight, filter: FlightSearch) {
+        //filter destination, or by ship, or by both
         if ((filter.destination != undefined || filter.destination != '') && filter.ship == undefined) {
             return flight.destination.toLowerCase().includes(filter.destination.toLocaleLowerCase());
         }

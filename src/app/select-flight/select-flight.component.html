@@ -27,9 +27,17 @@
 
     <mat-grid-tile>
         <mat-card>
+            <mat-label><u>Flights Available:</u></mat-label>
             <mat-list role="list">
-                <mat-list-item *ngFor="let flight of spaceFlights | FlightFilter:listFilter; let i = index" 
-                    (click)="selectFlight()" role="listitem">{{flight.flightNumber}}</mat-list-item>
+                <mat-list-item [disableRipple]="false" *ngFor="let flight of spaceFlights | FlightFilter:listFilter; let i = index" 
+                    (click)="selectFlight()" role="listitem">
+                    <div matLine>
+                    <b>{{flight.destination}}</b>
+                    </div>
+                    <div matLine>
+                    Flight Number: {{flight.flightNumber}}
+                    </div>
+                </mat-list-item>
             </mat-list>
         </mat-card>
     </mat-grid-tile>
