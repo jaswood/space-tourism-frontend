@@ -1,22 +1,27 @@
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>Selected Space Flight:</mat-card-title>
-        <mat-card-subtitle>Flight Details</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content *ngIf="spaceFlight != undefined">
+<mat-grid-list cols="2" rowHeight="350px" *ngIf="spaceFlight.destination != undefined">
+    <mat-grid-tile>
         <div>
-        <p><b>Flight:</b> {{spaceFlight.leavingLocation}} - {{spaceFlight.destination}}</p>
-        <br/>
-        <p><b>Flight Number:</b> {{spaceFlight.flightNumber}}</p>
-        <br />
-        <p><b>Flight Arrival/Destination Date:</b> {{spaceFlight.departureDate}} - {{spaceFlight.arrivalDate}}</p>
-        <br />
-        <p><b>Departure Gate:</b> {{spaceFlight.gate}}</p>
+            <p><b>Flight:</b> {{spaceFlight.leavingLocation}} - {{spaceFlight.destination}}</p>
+            <br />
+            <p><b>Flight Number:</b> {{spaceFlight.flightNumber}}</p>
+            <br />
+            <p><b>Flight Arrival/Destination Date:</b> {{spaceFlight.departureDate}} -
+                {{spaceFlight.arrivalDate}}</p>
+            <br />
+            <p><b>Departure Gate:</b> {{spaceFlight.gate}}</p>
         </div>
-        <mat-divider [inset]="true"></mat-divider>
-        
-    </mat-card-content>
-    <mat-card-actions *ngIf="showActions">
-        <button mat-raised-button>Book Tickets</button>
-    </mat-card-actions>
-</mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div>
+            <p><b>ship:</b> {{spaceFlight.ship.nameCode}}</p>
+            <br />
+            <p><b>Total Seats:</b> {{spaceFlight.ship.totalSeats}}</p>
+            <br />
+            <p><b>Fuel Capacity:</b> {{spaceFlight.ship.fuelCapacity}}<p>
+            <br />
+            <p><b>Max Speed:</b> {{spaceFlight.ship.maxSpeed}}</p>
+            <br />
+            <p><b>Age:</b> {{spaceFlight.ship.age}}</p>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

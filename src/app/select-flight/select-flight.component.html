@@ -1,4 +1,4 @@
-<mat-grid-list cols="3" rowHeight="300px">
+<mat-grid-list cols="3" rowHeight="400px">
     <mat-grid-tile>
         <mat-card>
             <mat-form-field>
@@ -44,6 +44,6 @@
     </mat-grid-tile>
 
     <mat-grid-tile colspan="3">
-        <app-flight-details [selectedFlight]="selectedFlight" [showActions]="true"></app-flight-details>
+        <app-flight-details [spaceFlight]="selectedFlight" [showActions]="true"></app-flight-details>
     </mat-grid-tile>
 </mat-grid-list>

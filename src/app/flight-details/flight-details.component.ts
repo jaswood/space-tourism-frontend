@@ -7,12 +7,8 @@ import { SpaceFlight } from 'src/models/spaceFlight';
   styleUrls: ['./flight-details.component.css']
 })
 export class FlightDetailsComponent implements OnInit, OnChanges {
-  @Input() set selectedFlight(flight: SpaceFlight) {
-      this.spaceFlight = flight || undefined;
-  }
+  @Input() spaceFlight: SpaceFlight;
   @Input() showActions: boolean;
-
-  spaceFlight: SpaceFlight = undefined;
 
   constructor() { }
 
@@ -22,5 +18,6 @@ export class FlightDetailsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(){
+    console.log(this.spaceFlight)
   }
 }
