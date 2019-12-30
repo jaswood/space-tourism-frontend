@@ -18,6 +18,11 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
 import { FlightFilterPipe } from './pipes/flight-filter.pipe';
 import { FlightDetailsComponent } from './flight-details/flight-details.component';
+import { SeatSelectionComponent } from './seat-selection/seat-selection.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
+
+const config: SocketIoConfig = { url: environment.url, options: {} };
 
 const MaterialModules = [
   MatSelectModule,
@@ -39,7 +44,8 @@ const routes: Routes = [
     SelectFlightComponent,
     MessagesComponent,
     FlightFilterPipe,
-    FlightDetailsComponent
+    FlightDetailsComponent,
+    SeatSelectionComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +54,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MaterialModules,
     BrowserAnimationsModule,
+    //connect as soon as program loads
+    SocketIoModule.forRoot(config)
 
   ],
   providers: [
