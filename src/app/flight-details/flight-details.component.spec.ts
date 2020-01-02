@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { FlightDetailsComponent } from './flight-details.component';
+import { SpaceFlight } from 'src/models/spaceFlight';
 
 describe('FlightDetailsComponent', () => {
   let component: FlightDetailsComponent;
@@ -8,7 +10,8 @@ describe('FlightDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FlightDetailsComponent ]
+      declarations: [ FlightDetailsComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
   }));
@@ -16,6 +19,7 @@ describe('FlightDetailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FlightDetailsComponent);
     component = fixture.componentInstance;
+    component.spaceFlight = new SpaceFlight();
     fixture.detectChanges();
   });
 

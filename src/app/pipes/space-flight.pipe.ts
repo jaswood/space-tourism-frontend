@@ -17,7 +17,7 @@ export class SpaceFlightPipe implements PipeTransform {
     return flights.filter((flight: SpaceFlight) => this.spaceFilter(flight, filter));
   }
 
-  spaceFilter(flight: SpaceFlight, filter: FlightSearch) {
+  public spaceFilter(flight: SpaceFlight, filter: FlightSearch) {
     //filter destination, or by ship, or by both
     if ((filter.destination != undefined || filter.destination != '') && filter.ship == undefined) {
       return flight.destination.toLowerCase().includes(filter.destination.toLocaleLowerCase());

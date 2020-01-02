@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { SeatSelectionComponent } from './seat-selection.component';
+import { SeatsService } from './services/seats.service';
+import { MockSeatService } from '../mocks/MockSeatService';
 
 describe('SeatSelectionComponent', () => {
   let component: SeatSelectionComponent;
@@ -8,7 +11,10 @@ describe('SeatSelectionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SeatSelectionComponent ]
+      declarations: [ SeatSelectionComponent ],
+      providers: [ {provide: SeatsService, useClass: MockSeatService}],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+
     })
     .compileComponents();
   }));
@@ -17,9 +23,5 @@ describe('SeatSelectionComponent', () => {
     fixture = TestBed.createComponent(SeatSelectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 });

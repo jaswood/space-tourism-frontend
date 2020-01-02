@@ -21,7 +21,9 @@ export class SelectFlightComponent implements OnInit {
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    let data = this.activatedRoute.snapshot.data['data'];
+    if(this.activatedRoute.snapshot != undefined){
+      var data = this.activatedRoute.snapshot.data['data'];
+    }
 
     if(data != null){
       data.spaceships.subscribe(data => {this.spaceships = data;});
@@ -31,7 +33,6 @@ export class SelectFlightComponent implements OnInit {
 
   destinationOnKey(value: string) {
     this.listFilter.destination = value;
-    console.log(this.listFilter);
   }
 
   selectFlight(flight: SpaceFlight) {
