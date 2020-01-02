@@ -21,6 +21,7 @@ import { SeatSelectionComponent } from './seat-selection/seat-selection.componen
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
 import { SpaceFlightPipe } from './pipes/space-flight.pipe';
+import { TicketInformationComponent } from './ticket-information/ticket-information.component';
 
 const config: SocketIoConfig = { url: environment.url, options: {} };
 
@@ -45,7 +46,8 @@ const routes: Routes = [
     MessagesComponent,
     FlightDetailsComponent,
     SeatSelectionComponent,
-    SpaceFlightPipe
+    SpaceFlightPipe,
+    TicketInformationComponent
   ],
   imports: [
     BrowserModule,
