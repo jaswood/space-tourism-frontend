@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { SelectFlightComponent } from './select-flight.component';
+import { SpaceFlightPipe } from '../pipes/space-flight.pipe';
+import { FlightDetailsComponent } from '../flight-details/flight-details.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { MockActivatedRoute } from '../mocks/MockActivatedRoute';
 
 describe('SelectFlightComponent', () => {
   let component: SelectFlightComponent;
@@ -8,7 +14,19 @@ describe('SelectFlightComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectFlightComponent ]
+      declarations: [ 
+        SelectFlightComponent,
+        SpaceFlightPipe,
+        FlightDetailsComponent
+      ],
+      imports: [
+        HttpClientModule,
+      ],
+      providers: [
+        { provide: ActivatedRoute, useValue: MockActivatedRoute }
+      ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+
     })
     .compileComponents();
   }));

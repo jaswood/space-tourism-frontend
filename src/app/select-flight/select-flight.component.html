@@ -1,10 +1,49 @@
-<mat-form-field>
-    <mat-label>Spaceship</mat-label>
-    <mat-select placeholder="Spaceship" [(value)]="selectedShip">
-        <mat-option *ngFor="let ship of spaceships" [value]="ship.nameCode">
-            {{ship.nameCode}}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
+<mat-grid-list cols="3" rowHeight="400px">
+    <mat-grid-tile>
+        <mat-card>
+            <mat-form-field>
+                <mat-label>Spaceship</mat-label>
+                <mat-select placeholder="Spaceship" [(value)]="listFilter.ship">
+                    <mat-option [value]="undefined">None</mat-option>
+                    <mat-option *ngFor="let ship of spaceships" [value]="ship.nameCode">
+                        {{ship.nameCode}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <p>Rocket Type: {{listFilter.ship}}</p>
+        </mat-card>
+    </mat-grid-tile>
 
-<p>You Selected: {{selectedShip}}</p>
+    <mat-grid-tile>
+        <mat-card>
+            <mat-form-field appearance="outline">
+                <mat-label>Destination</mat-label>
+                <input #dest (keyup)="destinationOnKey(dest.value)" matInput placeholder="Example: Moon">
+            </mat-form-field>
+            <p>Searching: {{listFilter.destination}}</p>
+        </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-card>
+            <mat-label><u>Flights Available:</u></mat-label>
+            <mat-list role="list">
+                <mat-list-item class="list-item" *ngFor="let flight of spaceFlights | spaceFlight:listFilter;" 
+                    (click)="selectFlight(flight)">
+                    <div matLine>
+                    <b>{{flight.destination}}</b>
+                    </div>
+                    <div matLine>
+                    Flight Number: {{flight.flightNumber}}
+                    </div>
+                    <mat-divider></mat-divider>
+                </mat-list-item>
+            </mat-list>
+        </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="3">
+        <app-flight-details [spaceFlight]="selectedFlight" [showActions]="true"></app-flight-details>
+    </mat-grid-tile>
+</mat-grid-list>
+<app-seat-selection></app-seat-selection>

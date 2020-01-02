@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { MessagesComponent } from './messages.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('MessagesComponent', () => {
   let component: MessagesComponent;
@@ -8,7 +10,12 @@ describe('MessagesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MessagesComponent ]
+      declarations: [ MessagesComponent ],
+      imports: [
+      HttpClientModule
+      ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA  ]
+
     })
     .compileComponents();
   }));

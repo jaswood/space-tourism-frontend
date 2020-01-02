@@ -1,0 +1,30 @@
+<mat-grid-list cols="2" rowHeight="350px" *ngIf="spaceFlight.destination != undefined">
+    <mat-grid-tile>
+        <div class="info">
+            <h3><u>Flight Details:</u></h3>
+            <p><b>Flight:</b> {{spaceFlight.leavingLocation}} - {{spaceFlight.destination}}</p>
+            <br />
+            <p><b>Flight Number:</b> {{spaceFlight.flightNumber}}</p>
+            <br />
+            <p><b>Flight Arrival/Destination Date:</b> {{spaceFlight.departureDate | date:'shortDate'}} -
+                {{spaceFlight.arrivalDate | date:'shortDate'}}</p>
+            <br />
+            <p><b>Departure Gate:</b> {{spaceFlight.gate}}</p>
+            <button mat-raised-button> Tickets </button>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="info">
+            <h3><u>Ship Details:</u></h3>
+            <p><b>ship:</b> {{spaceFlight.ship.nameCode}}</p>
+            <br />
+            <p><b>Total Seats:</b> {{spaceFlight.ship.totalSeats}}</p>
+            <br />
+            <p><b>Fuel Capacity:</b> {{spaceFlight.ship.fuelCapacity}}<p>
+            <br />
+            <p><b>Max Speed:</b> {{spaceFlight.ship.maxSpeed}}</p>
+            <br />
+            <p><b>Age:</b> {{spaceFlight.ship.age}}</p>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

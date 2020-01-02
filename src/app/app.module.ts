@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HttpClient } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,23 +13,39 @@ import { MessagesComponent } from './messages/messages.component';
 import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { SelectFlightResolverService } from './select-flight/resolvers/select-flight-resolver';
+import { MatInputModule } from '@angular/material';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatListModule} from '@angular/material/list';
+import { FlightDetailsComponent } from './flight-details/flight-details.component';
+import { SeatSelectionComponent } from './seat-selection/seat-selection.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
+import { SpaceFlightPipe } from './pipes/space-flight.pipe';
+
+const config: SocketIoConfig = { url: environment.url, options: {} };
 
 const MaterialModules = [
   MatSelectModule,
   MatFormFieldModule,
   MatCardModule,
-  MatButtonModule
+  MatButtonModule,
+  MatInputModule,
+  MatGridListModule,
+  MatListModule,
 ]
 
 const routes: Routes = [
-  {path: '', component: SelectFlightComponent, resolve: { spaceships: SelectFlightResolverService }}
+  {path: '', component: SelectFlightComponent, resolve: { data: SelectFlightResolverService }}
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
     SelectFlightComponent,
-    MessagesComponent
+    MessagesComponent,
+    FlightDetailsComponent,
+    SeatSelectionComponent,
+    SpaceFlightPipe
   ],
   imports: [
     BrowserModule,
@@ -38,9 +54,12 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MaterialModules,
     BrowserAnimationsModule,
+    //connect as soon as program loads
+    SocketIoModule.forRoot(config)
 
   ],
   providers: [
+    
   ],
   bootstrap: [AppComponent]
 })
