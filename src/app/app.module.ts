@@ -16,11 +16,11 @@ import { SelectFlightResolverService } from './select-flight/resolvers/select-fl
 import { MatInputModule } from '@angular/material';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
-import { FlightFilterPipe } from './pipes/flight-filter.pipe';
 import { FlightDetailsComponent } from './flight-details/flight-details.component';
 import { SeatSelectionComponent } from './seat-selection/seat-selection.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
+import { SpaceFlightPipe } from './pipes/space-flight.pipe';
 
 const config: SocketIoConfig = { url: environment.url, options: {} };
 
@@ -43,9 +43,9 @@ const routes: Routes = [
     AppComponent,
     SelectFlightComponent,
     MessagesComponent,
-    FlightFilterPipe,
     FlightDetailsComponent,
-    SeatSelectionComponent
+    SeatSelectionComponent,
+    SpaceFlightPipe
   ],
   imports: [
     BrowserModule,

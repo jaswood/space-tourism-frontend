@@ -29,7 +29,7 @@
         <mat-card>
             <mat-label><u>Flights Available:</u></mat-label>
             <mat-list role="list">
-                <mat-list-item class="list-item" *ngFor="let flight of spaceFlights | FlightFilter:listFilter;" 
+                <mat-list-item class="list-item" *ngFor="let flight of spaceFlights | spaceFlight:listFilter;" 
                     (click)="selectFlight(flight)">
                     <div matLine>
                     <b>{{flight.destination}}</b>
