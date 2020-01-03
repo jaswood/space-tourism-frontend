@@ -16,16 +16,17 @@ export class SelectFlightComponent implements OnInit {
     spaceFlights: SpaceFlight[] = [];
     listFilter: FlightSearch = new FlightSearch();
     selectedFlight: SpaceFlight = new SpaceFlight();
+    orderingTickets: boolean = true;
 
   constructor(private selectFlightService: SelectFlightService,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    if(this.activatedRoute.snapshot != undefined){
+    if(this.activatedRoute.snapshot != undefined) {
       var data = this.activatedRoute.snapshot.data['data'];
     }
 
-    if(data != null){
+    if(data != null) {
       data.spaceships.subscribe(data => {this.spaceships = data;});
       data.spaceFlights.subscribe(data => {this.spaceFlights = data;});
     }
@@ -38,5 +39,10 @@ export class SelectFlightComponent implements OnInit {
   selectFlight(flight: SpaceFlight) {
     this.selectedFlight = flight;
   }
+
+  toggleTickets() {
+    this.orderingTickets = !this.orderingTickets;
+  }
+
 
 }

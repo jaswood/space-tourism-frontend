@@ -1,1 +1,35 @@
-<p>ticket-information works!</p>
+<h2>Ticket Order:</h2>
+<mat-divider></mat-divider>
+<div>
+    <mat-label >Enter Details</mat-label>
+    <br />
+    <mat-form-field>
+        <input #firstName matInput placeholder="First Name" (keyup)="firstNameOnKey(firstName.value)">
+    </mat-form-field>
+    <mat-form-field>
+        <input #lastName matInput placeholder="Last Name" (keyup)="lastNameOnKey(lastName.value)">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [max]="maxDate" [matDatepicker]="picker" placeholder="Date of Birth"
+            (dateChange)="setDate('change', $event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <input #ppNo matInput placeholder="Passport Number" (keyup)="passportNoOnKey(ppNo.value)">
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <mat-label>Seat Quantity</mat-label>
+    <br />
+    <mat-form-field>
+        <input #seatQuantity matInput placeholder="Quantity" (keyup)="seatQuantityOnKey(seatQuantity.value)">
+    </mat-form-field>
+    <mat-form-field>
+        <input #emailAddress matInput placeholder="Enter email" (keyup)="emailAddressOnKey(emailAddress.value)">
+    </mat-form-field>
+    <span>
+        Seats Available: {{spaceFlight.availableSeats}}
+    </span>
+</div>
+<mat-divider></mat-divider>
+<button mat-raised-button (click)="submitTicketRequest()"> Submit </button>
