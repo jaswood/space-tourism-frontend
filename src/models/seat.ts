@@ -1,4 +1,5 @@
 export class Seat {
-    row: number;
-    seat: string;
+    seatNo: number;
+    seatCode: string;
+    color? = 'darkgrey';
 }

@@ -10,7 +10,11 @@
                 {{spaceFlight.arrivalDate | date:'shortDate'}}</p>
             <br />
             <p><b>Departure Gate:</b> {{spaceFlight.gate}}</p>
-            <button mat-raised-button (click)="openTicketOrdering(true)"> Tickets </button>
+            <ng-container *ngIf="!showActions">
+                <br />
+                <p><b>Available Seats:</b> {{spaceFlight.availableSeats}}</p>
+            </ng-container>
+            <button  *ngIf="showActions" mat-raised-button (click)="openTicketOrdering(true)"> Tickets </button>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>

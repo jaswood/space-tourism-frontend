@@ -1,3 +1,34 @@
-<p>seat-selection works!</p>
 <button mat-button (click)="testSockets()">Test sockets</button>
-<p>{{ticket.firstName}}</p>
+<mat-grid-list cols="12" rowHeight="360px">
+    <mat-grid-tile [colspan]="2">
+        <div class="info">
+            <h3><u>Seat Selection:</u></h3>
+            <p>Please select the seats you would like to sit in below, the selected seats will show in orange and available seats in dark grey</p>
+            <br />
+            <p><b>Note: </b>If the number of available seats is ten or lower, the seats will be auctioned off to the highest bidder</p>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="7">
+        <app-flight-details [spaceFlight]="ticket.spaceFlight" [showActions]="false" [ticketsBeingOrdered]="false"></app-flight-details>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3">
+        <div class="info">
+            <h3><u>Seats Selected:</u></h3>
+            <p>The seats you have selected are listed below...</p>
+            <div *ngFor="let seat of selectedSeats, index as i">
+
+                <p><b>Seat {{(i + 1)}}: </b>{{seat.seatNo}}{{seat.seatCode}}
+            </div>
+            <button mat-raised-button (click)="orderTickets()"> Order Tickets </button>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="12">
+        <div class="shipEnds">Front</div>
+        <div *ngFor="let column of columnsOfSeats; index as i" class="column">
+            <div *ngFor="let seat of column.seats; index as j" class="seat"  (click)="selectSeat(seat, i, j)" [style.background-color]="columnsOfSeats[i].seats[j].color"></div>
+        </div>
+        <div class="shipEnds">Back</div>
+    </mat-grid-tile>
+</mat-grid-list>
+
+
