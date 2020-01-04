@@ -22,7 +22,6 @@ export class FlightDetailsComponent implements OnInit, OnChanges {
   }
 
   openTicketOrdering(value) {
-    console.log('emit');
     this.orderTickets.emit(value);
   }
 }

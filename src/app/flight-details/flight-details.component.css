@@ -14,7 +14,7 @@ mat-grid-list {
 }
 
 .info button {
-    margin-top: 20%;
+    margin-top: 15%;
     float: right;
 }
 
@@ -22,3 +22,4 @@ mat-grid-list {
     margin-bottom: 0%;
     margin-top: 1%;
 }
+

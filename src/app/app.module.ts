@@ -23,6 +23,7 @@ import { environment } from 'src/environments/environment';
 import { SpaceFlightPipe } from './pipes/space-flight.pipe';
 import { TicketInformationComponent } from './ticket-information/ticket-information.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 const config: SocketIoConfig = { url: environment.url, options: {} };
@@ -61,6 +62,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MaterialModules,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     //connect as soon as program loads
     SocketIoModule.forRoot(config)
 

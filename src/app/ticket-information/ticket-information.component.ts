@@ -4,6 +4,7 @@ import { Ticket } from 'src/models/ticket';
 import { MatDatepickerInputEvent } from '@angular/material';
 import { TicketInformationService } from './services/ticket-information.service';
 import { Router } from '@angular/router';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-ticket-information',
@@ -15,13 +16,21 @@ export class TicketInformationComponent implements OnInit {
 
   maxDate = new Date();
   ticket = new Ticket();
+  form = new FormGroup({
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    dob: new FormControl('', Validators.required), 
+    passport: new FormControl('', Validators.required),
+    seatQuantity: new FormControl('', [Validators.required, Validators.max(5), Validators.min(1)]),
+  });
+  
 
   constructor(private ticketInfoService: TicketInformationService,
     private router: Router) { }
 
   ngOnInit() {
     this.maxDate.setDate(this.workoutMaxDate())
-    console.log(this.maxDate)
   }
 
   workoutMaxDate(): number {
@@ -54,6 +63,6 @@ export class TicketInformationComponent implements OnInit {
   }
 
   emailAddressOnKey(value) {
-    this.ticket.emailAddress = value
+      this.ticket.emailAddress = value;
   }
 }

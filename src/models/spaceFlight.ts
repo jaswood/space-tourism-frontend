@@ -8,5 +8,5 @@ export class SpaceFlight {
     flightNumber: string;
     destination: string;
     leavingLocation: string;
-    availableSeats: number = 6;
+    availableSeats: number;
 }
