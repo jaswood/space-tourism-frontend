@@ -16,7 +16,7 @@ export class SelectFlightComponent implements OnInit {
     spaceFlights: SpaceFlight[] = [];
     listFilter: FlightSearch = new FlightSearch();
     selectedFlight: SpaceFlight = new SpaceFlight();
-    orderingTickets: boolean = true;
+    orderingTickets: boolean = false;
 
   constructor(private selectFlightService: SelectFlightService,
     private activatedRoute: ActivatedRoute) { }
