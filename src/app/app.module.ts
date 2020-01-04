@@ -40,7 +40,8 @@ const MaterialModules = [
 ]
 
 const routes: Routes = [
-  {path: '', component: SelectFlightComponent, resolve: { data: SelectFlightResolverService }}
+  {path: '', component: SelectFlightComponent, resolve: { data: SelectFlightResolverService }},
+  {path: 'seat-selection/:flightNumber', component: SeatSelectionComponent }
 ]
 
 @NgModule({

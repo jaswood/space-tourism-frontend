@@ -18,14 +18,14 @@
     <mat-form-field>
         <input #ppNo matInput placeholder="Passport Number" (keyup)="passportNoOnKey(ppNo.value)">
     </mat-form-field>
+    <mat-form-field>
+        <input #emailAddress matInput placeholder="Enter email" (keyup)="emailAddressOnKey(emailAddress.value)">
+    </mat-form-field>
     <mat-divider></mat-divider>
     <mat-label>Seat Quantity</mat-label>
     <br />
     <mat-form-field>
         <input #seatQuantity matInput placeholder="Quantity" (keyup)="seatQuantityOnKey(seatQuantity.value)">
-    </mat-form-field>
-    <mat-form-field>
-        <input #emailAddress matInput placeholder="Enter email" (keyup)="emailAddressOnKey(emailAddress.value)">
     </mat-form-field>
     <span>
         Seats Available: {{spaceFlight.availableSeats}}

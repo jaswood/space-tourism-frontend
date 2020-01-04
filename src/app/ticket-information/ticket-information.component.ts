@@ -3,6 +3,7 @@ import { SpaceFlight } from 'src/models/spaceFlight';
 import { Ticket } from 'src/models/ticket';
 import { MatDatepickerInputEvent } from '@angular/material';
 import { TicketInformationService } from './services/ticket-information.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ticket-information',
@@ -15,7 +16,8 @@ export class TicketInformationComponent implements OnInit {
   maxDate = new Date();
   ticket = new Ticket();
 
-  constructor(private ticketInfoService: TicketInformationService) { }
+  constructor(private ticketInfoService: TicketInformationService,
+    private router: Router) { }
 
   ngOnInit() {
     this.maxDate.setDate(this.workoutMaxDate())
@@ -27,8 +29,8 @@ export class TicketInformationComponent implements OnInit {
   }
 
   submitTicketRequest() {
-    console.log(this.ticket);
-    this.ticketInfoService.postTicket(this.ticket)
+    this.router.navigateByUrl(`/seat-selection/${this.spaceFlight.flightNumber}`, {state: {data: {ticket: this.ticket}}});
+    // this.ticketInfoService.postTicket(this.ticket)
   }
 
   firstNameOnKey(value) {
