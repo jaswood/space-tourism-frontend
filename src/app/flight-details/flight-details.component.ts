@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { SpaceFlight } from 'src/models/spaceFlight';
 
 @Component({
@@ -9,6 +9,9 @@ import { SpaceFlight } from 'src/models/spaceFlight';
 export class FlightDetailsComponent implements OnInit, OnChanges {
   @Input() spaceFlight: SpaceFlight;
   @Input() showActions: boolean;
+  @Input() ticketsBeingOrdered: boolean;
+  @Output() orderTickets = new EventEmitter<boolean>();
+
 
   constructor() { }
 
@@ -16,5 +19,9 @@ export class FlightDetailsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(){
+  }
+
+  openTicketOrdering(value) {
+    this.orderTickets.emit(value);
   }
 }

@@ -1,0 +1,40 @@
+<h2>Ticket Order:</h2>
+<form [formGroup]="form">
+    <mat-divider></mat-divider>
+    <div>
+        <mat-label>Enter Details</mat-label>
+        <br />
+        <mat-form-field>
+            <input #firstName matInput placeholder="First Name" (keyup)="firstNameOnKey(firstName.value)" formControlName="firstName" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input #lastName matInput placeholder="Last Name" (keyup)="lastNameOnKey(lastName.value)" formControlName="lastName" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput [max]="maxDate" [matDatepicker]="picker" placeholder="Date of Birth"
+                (dateChange)="setDate('change', $event)" formControlName="dob" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <input #ppNo matInput placeholder="Passport Number" (keyup)="passportNoOnKey(ppNo.value)" formControlName="passport" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input #emailAddress matInput placeholder="Enter email" (keyup)="emailAddressOnKey(emailAddress.value)"
+                formControlName="email" required>
+            <!-- <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error> -->
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <mat-label>Seat Quantity</mat-label>
+        <br />
+        <mat-form-field>
+            <input type='number' #seatQuantity matInput placeholder="Quantity" (keyup)="seatQuantityOnKey(seatQuantity.value)" formControlName="seatQuantity" required>
+            <mat-hint>Max: 5 - Min: 1</mat-hint>
+        </mat-form-field>
+        <span>
+            Seats Available: {{spaceFlight.availableSeats}}
+        </span>
+    </div>
+    <mat-divider></mat-divider>
+</form>
+<button [disabled]="!form.valid"  mat-raised-button (click)="submitTicketRequest()"> Submit </button>

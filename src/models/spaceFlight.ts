@@ -8,4 +8,5 @@ export class SpaceFlight {
     flightNumber: string;
     destination: string;
     leavingLocation: string;
+    availableSeats: number;
 }

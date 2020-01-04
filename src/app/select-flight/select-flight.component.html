@@ -43,7 +43,12 @@
     </mat-grid-tile>
 
     <mat-grid-tile colspan="3">
-        <app-flight-details [spaceFlight]="selectedFlight" [showActions]="true"></app-flight-details>
+        <app-flight-details [spaceFlight]="selectedFlight" [showActions]="true" [ticketsBeingOrdered]="orderingTickets" (orderTickets)="orderingTickets = !orderingTickets"></app-flight-details>
     </mat-grid-tile>
 </mat-grid-list>
-<app-seat-selection></app-seat-selection>
+<div *ngIf="orderingTickets"  class="ticketInfo">
+    <div class="ticketInfoContent">
+        <span class="close" (click)="toggleTickets()">&times;</span> 
+<app-ticket-information [spaceFlight]="selectedFlight"></app-ticket-information>
+    </div>
+</div >
