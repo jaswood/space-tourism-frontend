@@ -39,10 +39,9 @@ export class SeatsService {
             newSeat.seatNo = reservedSeat.seatNo;
             seats.push(newSeat);
           }
-          console.log(seats);
           return seats;
-        })
-        // catchError(this.handleError<Seat[]>('getSeats', []))
+        }),
+        catchError(this.handleError<Seat[]>('getSeats', []))
       );
   }
 
