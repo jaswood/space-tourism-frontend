@@ -28,7 +28,7 @@
         <mat-label>Seat Quantity</mat-label>
         <br />
         <mat-form-field>
-            <input type='number' #seatQuantity matInput placeholder="Quantity" (keyup)="seatQuantityOnKey(seatQuantity.value)" formControlName="seatQuantity" required>
+            <input type='number' #seatQuantity matInput placeholder="Quantity" (change)="seatQuantityOnKey(seatQuantity.value)" formControlName="seatQuantity" required>
             <mat-hint>Max: 5 - Min: 1</mat-hint>
         </mat-form-field>
         <span>

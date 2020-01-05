@@ -9,6 +9,7 @@ export class Ticket {
     passportNumber: number;
     seatQuantity: number;
     emailAddress: string;
+    flightNumber: string;
     spaceFlight: SpaceFlight;
     seats?: Seat[] = [];
 }

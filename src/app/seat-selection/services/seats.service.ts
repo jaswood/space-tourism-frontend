@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Seat } from 'src/models/seat';
 import { Ticket } from 'src/models/ticket';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { catchError } from 'rxjs/operators';
+import { catchError, map, toArray } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,24 @@ export class SeatsService {
     return this.http.post<Ticket>(environment.url + '/tickets/ticket', ticket)
       .pipe(
         catchError(this.handleError<Ticket>('PostTicket', ticket))
+      );
+  }
+
+  getReservedSeats(flightNumber: string): Observable<Seat[]> {
+    return this.http.get(environment.url + `/seats/reserved/${flightNumber}`)
+      .pipe(
+        map((res: Array<Seat>) => {
+          let seats: Seat[] = [];
+          for(let reservedSeat of res){
+            let newSeat: Seat = new Seat();
+            newSeat.seatCode = reservedSeat.seatCode;
+            newSeat.seatNo = reservedSeat.seatNo;
+            seats.push(newSeat);
+          }
+          console.log(seats);
+          return seats;
+        })
+        // catchError(this.handleError<Seat[]>('getSeats', []))
       );
   }
 

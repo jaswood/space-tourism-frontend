@@ -58,7 +58,7 @@ export class TicketInformationComponent implements OnInit {
     this.ticket.dob = event.value;
   }
 
-  seatQuantity(value) {
+  seatQuantityOnKey(value) {
     this.ticket.seatQuantity = value;
   }
 

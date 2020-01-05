@@ -27,6 +27,7 @@ mat-grid-tile {
 }
 
 .seat {
+    z-index: 10;
     display: block;
     flex-direction: column;
     margin: 20% !important;
@@ -37,6 +38,7 @@ mat-grid-tile {
 }
 
 .seat:hover {
+    
     background-color: darkorange;
 }
 
