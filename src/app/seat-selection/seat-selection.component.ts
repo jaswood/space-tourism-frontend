@@ -15,10 +15,15 @@ import { TicketInformationService } from '../ticket-information/services/ticket-
   styleUrls: ['./seat-selection.component.css']
 })
 export class SeatSelectionComponent implements OnInit, OnDestroy {
-  private seatSub: Subscription;
-  ticket: Ticket = new Ticket();
-  seat: Seat;
+  private noOfBiddersSub: Subscription;
+  private othersReadyToAuctionSub: Subscription;
+  private beginAuctionSub: Subscription;
+  noOfBidders: number;
+  othersReadyToAuction: boolean;
+  beginAuction: boolean;
 
+
+  ticket: Ticket = new Ticket();
   columnsOfSeats: SeatColumn[] = [];
   noOfColumns: number;
   numberOfSeatsInARow = 5;
@@ -60,19 +65,26 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
     this.setUpSeats();
     this.assignReservedSeats();
 
-    this.seatSub = this.seatService.seat.pipe(
-      startWith({ seatNo: 2, seatCode: 'A' })
-    ).subscribe(seat => this.seat = seat);
+    this.noOfBiddersSub = this.seatService.noOfBidders
+      .subscribe(noOfBidders => this.noOfBidders = noOfBidders );
+    this.othersReadyToAuctionSub = this.seatService.othersReadyToAuction
+      .subscribe(ready => this.othersReadyToAuction = ready);
+    this.beginAuctionSub = this.seatService.beginAuction
+      .subscribe(begin => this.beginAuction = begin);
   }
 
   ngOnDestroy() {
-    this.seatSub.unsubscribe();
+    this.noOfBiddersSub.unsubscribe();
+    this.othersReadyToAuctionSub.unsubscribe();
+    this.beginAuctionSub.unsubscribe();
   }
 
   testSockets() {
-    console.log('here');
-    console.log(this.seat);
-    this.seatService.getSeat('5');
+    this.seatService.registerFlightAuction(this.ticket.spaceFlight.flightNumber);
+  }
+
+  readyToAuction() {
+    this.seatService.readyToAuction();
   }
 
   selectSeat(seat: Seat, columnIndex: number, seatIndex: number) {

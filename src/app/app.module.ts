@@ -24,6 +24,7 @@ import { SpaceFlightPipe } from './pipes/space-flight.pipe';
 import { TicketInformationComponent } from './ticket-information/ticket-information.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SeatAuctionComponent } from './seat-auction/seat-auction.component';
 
 
 const config: SocketIoConfig = { url: environment.url, options: {} };
@@ -53,7 +54,8 @@ const routes: Routes = [
     FlightDetailsComponent,
     SeatSelectionComponent,
     SpaceFlightPipe,
-    TicketInformationComponent
+    TicketInformationComponent,
+    SeatAuctionComponent
   ],
   imports: [
     BrowserModule,
