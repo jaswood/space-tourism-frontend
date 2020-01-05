@@ -1,5 +1,5 @@
-<p>seat-auction works!</p>
+<p>Highest Bid {{highestBid}}</p>
 <mat-form-field>
-    <input type="number" matInput placeholder="enter value" required>
+    <input type="number" #bidAmount matInput placeholder="enter value" required>
 </mat-form-field>
-<button mat-raised-button (click)="bid()">Bid</button>
+<button mat-raised-button (click)="bid(bidAmount.value)" [disabled]="endAuction">Bid</button>

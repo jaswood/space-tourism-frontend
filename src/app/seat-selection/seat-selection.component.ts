@@ -170,4 +170,9 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
     return ('T' + this.ticket.flightNumber + number.toString());
   }
 
+  closeAuction() {
+    console.log('here');
+    this.beginAuction = false;
+  }
+
 }

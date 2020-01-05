@@ -1,7 +1,12 @@
 <button mat-button (click)="testSockets()">Test sockets</button>
 <button mat-button (click)="readyToAuction()">Test ready</button>
-<app-seat-auction *ngIf="beginAuction" [beginAuction]="beginAuction"></app-seat-auction>
 
+<div *ngIf="beginAuction" class="seatAuction">
+    <div class="seatAuctionContent">
+        <span class="close" (click)="closeAuction()" >&times;</span> 
+        <app-seat-auction [beginAuction]="beginAuction"></app-seat-auction>
+    </div>
+</div>
 <mat-grid-list cols="12" rowHeight="360px">
     <mat-grid-tile [colspan]="2">
         <div class="info">

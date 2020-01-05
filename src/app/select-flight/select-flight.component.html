@@ -28,13 +28,13 @@
         <mat-card>
             <mat-label><u>Flights Available:</u></mat-label>
             <mat-list role="list">
-                <mat-list-item class="list-item" *ngFor="let flight of spaceFlights | spaceFlight:listFilter;" 
+                <mat-list-item class="list-item" *ngFor="let flight of spaceFlights | spaceFlight:listFilter;"
                     (click)="selectFlight(flight)">
                     <div matLine>
-                    <b>{{flight.destination}}</b>
+                        <b>{{flight.destination}}</b>
                     </div>
                     <div matLine>
-                    Flight Number: {{flight.flightNumber}}
+                        Flight Number: {{flight.flightNumber}}
                     </div>
                     <mat-divider></mat-divider>
                 </mat-list-item>
@@ -43,12 +43,13 @@
     </mat-grid-tile>
 
     <mat-grid-tile colspan="3">
-        <app-flight-details [spaceFlight]="selectedFlight" [showActions]="true" [ticketsBeingOrdered]="orderingTickets" (orderTickets)="orderingTickets = !orderingTickets"></app-flight-details>
+        <app-flight-details [spaceFlight]="selectedFlight" [showActions]="true" [ticketsBeingOrdered]="orderingTickets"
+            (orderTickets)="orderingTickets = !orderingTickets"></app-flight-details>
     </mat-grid-tile>
 </mat-grid-list>
-<div *ngIf="orderingTickets"  class="ticketInfo">
+<div *ngIf="orderingTickets" class="ticketInfo">
     <div class="ticketInfoContent">
-        <span class="close" (click)="toggleTickets()">&times;</span> 
-<app-ticket-information [spaceFlight]="selectedFlight"></app-ticket-information>
+        <span class="close" (click)="toggleTickets()">&times;</span>
+        <app-ticket-information [spaceFlight]="selectedFlight"></app-ticket-information>
     </div>
-</div >
+</div>
