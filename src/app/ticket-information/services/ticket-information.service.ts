@@ -12,18 +12,18 @@ export class TicketInformationService {
 
   constructor(private http: HttpClient) { }
 
-  postTicket(ticket: Ticket): Observable<Ticket> {
-    return this.http.post<Ticket>(environment.url + '/tickets/ticket', ticket)
-      .pipe(
-        catchError(this.handleError<Ticket>('PostTicket', ticket))
-      );
-  }
-
   putSeatsAvailable(seatsAvailable: number): Observable<number> {
     return this.http.put<number>(environment.url + '/seats/seat', seatsAvailable)
       .pipe(
         catchError(this.handleError<number>('putSeatsAvailable', seatsAvailable))
       );
+  }
+
+  getTicket(ticketNumber: string): Observable<Ticket> {
+    return this.http.get<Ticket>(environment.url + `/tickets/${ticketNumber}`)
+    .pipe(
+      catchError(this.handleError<Ticket>('getTicket'))
+    )
   }
 
   private handleError<T>(operation = 'operation', result?: T){

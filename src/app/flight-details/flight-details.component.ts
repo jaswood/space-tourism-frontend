@@ -12,13 +12,16 @@ export class FlightDetailsComponent implements OnInit, OnChanges {
   @Input() ticketsBeingOrdered: boolean;
   @Output() orderTickets = new EventEmitter<boolean>();
 
-
   constructor() { }
 
   ngOnInit() {
   }
 
   ngOnChanges(){
+    if(this.spaceFlight.availableSeats == 0)
+      this.showActions = false;
+    else
+       this.showActions = true;
   }
 
   openTicketOrdering(value) {

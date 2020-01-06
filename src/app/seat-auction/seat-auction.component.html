@@ -1,0 +1,23 @@
+<h2>Spaceflight Auction House:</h2>
+<div *ngIf="!startBidding">
+    <p>In this auction house you will be bidding for 1 seat! You will then be able to select it after leaving this
+        screen, Should you win!
+        Bidding lasts for 10 seconds and will have a 10 second grace waiting period to allow other customers to join
+        before starting the bidding</p>
+
+    <p><b>Customer Waiting to Bid:</b> {{noOfBidders}}</p>
+
+    <button mat-raised-button (click)="clickStartBidding()">Start Bidding</button>
+</div>
+<div *ngIf="startBidding">
+    <h2 *ngIf="showWin">You Win!</h2>
+    <p>Highest Bid: {{highestBid}}</p>
+    <p *ngIf="timeRemaining > biddingDuration">Grace period until bidding begins: {{timeRemaining - biddingDuration}}
+    </p>
+    <p *ngIf="timeRemaining <= biddingDuration">Time Remaining: {{timeRemaining}}</p>
+    <mat-form-field>
+        <input type="number" #bidAmount matInput placeholder="enter value" required>
+    </mat-form-field>
+    <button mat-raised-button (click)="bid(bidAmount.value)"
+        [disabled]="endAuction || (timeRemaining > biddingDuration)">Bid</button>
+</div>

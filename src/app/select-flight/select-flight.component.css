@@ -42,3 +42,19 @@ mat-grid-tile {
     text-decoration: none;
     cursor: pointer;
 }
+
+button {
+    margin-left: 3%;
+}
+
+.ticketSearch {
+    width: 500px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+mat-card {
+    width: calc(100% - 70px);
+    height: calc(100% - 70px);
+    overflow: auto;
+  }

@@ -1,9 +1,9 @@
 export class Spaceship {
-    shipId: Number;
-    nameCode: String;
+    shipId: number;
+    nameCode: string;
     fuelCapacity: number;
-    totalSeats: Number;
-    maxSpeed: Number;
-    age: Number;
-    noOfRows: Number;
+    totalSeats: number;
+    maxSpeed: number;
+    age: number;
+    noOfRows: number;
 }

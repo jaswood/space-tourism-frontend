@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SpaceFlight } from 'src/models/spaceFlight';
-import { Ticket } from 'src/models/ticket';
+import { SpaceFlight } from '../../models/spaceFlight';
+import { Ticket } from '../../models/ticket';
 import { MatDatepickerInputEvent } from '@angular/material';
 import { TicketInformationService } from './services/ticket-information.service';
 import { Router } from '@angular/router';
@@ -38,8 +38,8 @@ export class TicketInformationComponent implements OnInit {
   }
 
   submitTicketRequest() {
+    this.ticket.spaceFlight = this.spaceFlight;
     this.router.navigateByUrl(`/seat-selection/${this.spaceFlight.flightNumber}`, {state: {data: {ticket: this.ticket}}});
-    // this.ticketInfoService.postTicket(this.ticket)
   }
 
   firstNameOnKey(value) {
@@ -58,7 +58,7 @@ export class TicketInformationComponent implements OnInit {
     this.ticket.dob = event.value;
   }
 
-  seatQuantity(value) {
+  seatQuantityOnKey(value) {
     this.ticket.seatQuantity = value;
   }
 
