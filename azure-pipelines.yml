@@ -25,3 +25,10 @@ steps:
 
 - script: ng test --watch=false
   displayName: 'Tests'
+
+- task: PublishTestResults@2
+  condition: succeedOrFailed()
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TEST-*.xml'
+  displayName: 'publish test results'
