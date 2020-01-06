@@ -32,7 +32,8 @@ import { FlightSearch } from 'src/models/flightSearch';
       flightNumber: 'Mun1',
       gate: 'A0',
       leavingLocation: 'Heathrow',
-      ship: ships[0]
+      ship: ships[0],
+      availableSeats: 10
     },
     {
       arrivalDate:  new Date(Date.now()),
@@ -41,7 +42,8 @@ import { FlightSearch } from 'src/models/flightSearch';
       flightNumber: 'Mun2',
       gate: 'A0',
       leavingLocation: 'Heathrow',
-      ship: ships[1]
+      ship: ships[1],
+      availableSeats: 10
     }
   ];
 

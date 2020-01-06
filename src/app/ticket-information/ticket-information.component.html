@@ -22,7 +22,6 @@
         <mat-form-field>
             <input #emailAddress matInput placeholder="Enter email" (keyup)="emailAddressOnKey(emailAddress.value)"
                 formControlName="email" required>
-            <!-- <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error> -->
         </mat-form-field>
         <mat-divider></mat-divider>
         <mat-label>Seat Quantity</mat-label>
@@ -31,7 +30,7 @@
             <input type='number' #seatQuantity matInput placeholder="Quantity" (change)="seatQuantityOnKey(seatQuantity.value)" formControlName="seatQuantity" required>
             <mat-hint>Max: 5 - Min: 1</mat-hint>
         </mat-form-field>
-        <span>
+        <span *ngIf="spaceFlight != undefined">
             Seats Available: {{spaceFlight.availableSeats}}
         </span>
     </div>
