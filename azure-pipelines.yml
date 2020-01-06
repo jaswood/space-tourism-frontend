@@ -24,4 +24,4 @@ steps:
   displayName: Build
 
 - script: ng test --watch=false
-displayName: 'Tests'
+  displayName: 'Tests'
