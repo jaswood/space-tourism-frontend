@@ -19,6 +19,13 @@ export class TicketInformationService {
       );
   }
 
+  getTicket(ticketNumber: string): Observable<Ticket> {
+    return this.http.get<Ticket>(environment.url + `/tickets/${ticketNumber}`)
+    .pipe(
+      catchError(this.handleError<Ticket>('getTicket'))
+    )
+  }
+
   private handleError<T>(operation = 'operation', result?: T){
     return (error: any): Observable<T> => {
       console.error('{{operation}}\n' + error);

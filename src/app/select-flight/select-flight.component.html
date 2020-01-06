@@ -11,11 +11,8 @@
                 </mat-select>
             </mat-form-field>
             <p>Rocket Type: {{listFilter.ship}}</p>
-        </mat-card>
-    </mat-grid-tile>
-
-    <mat-grid-tile>
-        <mat-card>
+            <mat-divider></mat-divider>
+            <br />
             <mat-form-field appearance="outline">
                 <mat-label>Destination</mat-label>
                 <input #dest (keyup)="destinationOnKey(dest.value)" matInput placeholder="Example: Moon">
@@ -25,13 +22,14 @@
     </mat-grid-tile>
 
     <mat-grid-tile>
+
         <mat-card>
             <mat-label><u>Flights Available:</u></mat-label>
             <mat-list role="list">
                 <mat-list-item class="list-item" *ngFor="let flight of spaceFlights | spaceFlight:listFilter;"
                     (click)="selectFlight(flight)">
                     <div matLine>
-                        <b>{{flight.destination}}</b>
+                        <b>Destination: {{flight.destination}}</b>
                     </div>
                     <div matLine>
                         Flight Number: {{flight.flightNumber}}
@@ -42,10 +40,26 @@
         </mat-card>
     </mat-grid-tile>
 
+    <mat-grid-tile>
+        <mat-card class="ticketSearchCard">
+            <mat-label><u>Search for your ticket:</u></mat-label>
+            <br />
+            <div class="ticketSearch">
+                <mat-form-field appearance="outline">
+                    <mat-label>Ticket Number</mat-label>
+                    <input #ticket matInput placeholder="Example: ">
+                </mat-form-field>
+                <button (click)="searchForTicket(ticket.value)" mat-raised-button> Search </button>
+            </div>
+            <app-ticket-search *ngIf="boughtTicketDetails != undefined" [ticket]="boughtTicketDetails"></app-ticket-search>
+        </mat-card>
+    </mat-grid-tile>
+
     <mat-grid-tile colspan="3">
         <app-flight-details [spaceFlight]="selectedFlight" [showActions]="true" [ticketsBeingOrdered]="orderingTickets"
             (orderTickets)="orderingTickets = !orderingTickets"></app-flight-details>
     </mat-grid-tile>
+
 </mat-grid-list>
 <div *ngIf="orderingTickets" class="ticketInfo">
     <div class="ticketInfoContent">

@@ -156,7 +156,7 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
     this.ticket.ticketNumber = this.generateTicketNumber();
     console.log(this.ticket);
     this.seatService.postTicket(this.ticket).subscribe(() => {
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl('',  {state: {data: {ticketNumber: this.ticket.ticketNumber}}});
     });
   }
 
@@ -170,6 +170,9 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
     console.log('here');
     this.showAuctionOptions = false;
     this.beginAuction = false;
+    if(this.ticket.seatQuantity == 0) {
+      this.router.navigateByUrl('');
+    }
   }
 
 }

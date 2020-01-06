@@ -1,0 +1,23 @@
+<div *ngIf="ticket != undefined">
+    <div class="info">
+        <p><b>Name:</b> {{ticket.firstName}} {{ticket.lastName}}</p>
+        <p><b>Flight Number:</b> {{ticket.flightNumber}}</p>
+        <p><b>passportNumber:</b> {{ticket.passportNumber}}</p>
+        <p><b>emailAddress:</b> {{ticket.emailAddress}}</p>
+        <p><b>Seats:</b> <span *ngFor="let seat of ticket.seats;index as i">
+            {{seat.seatNo}}{{seat.seatCode}},
+        </span>
+        </p>
+    </div>
+</div>
+
+<!-- ticketNumber: string;
+    firstName: string;
+    lastName: string;
+    dob: Date;
+    passportNumber: number;
+    seatQuantity: number;
+    emailAddress: string;
+    flightNumber: string;
+    spaceFlight: SpaceFlight;
+    seats?: Seat[] = []; -->

@@ -13,7 +13,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { SelectFlightResolverService } from './select-flight/resolvers/select-flight-resolver';
-import { MatInputModule, MatNativeDateModule } from '@angular/material';
+import { MatInputModule, MatNativeDateModule, MatSnackBarModule } from '@angular/material';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
 import { FlightDetailsComponent } from './flight-details/flight-details.component';
@@ -25,6 +25,7 @@ import { TicketInformationComponent } from './ticket-information/ticket-informat
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SeatAuctionComponent } from './seat-auction/seat-auction.component';
+import { TicketSearchComponent } from './ticket-search/ticket-search.component';
 
 
 const config: SocketIoConfig = { url: environment.url, options: {} };
@@ -38,7 +39,8 @@ const MaterialModules = [
   MatGridListModule,
   MatListModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatSnackBarModule
 ]
 
 const routes: Routes = [
@@ -55,7 +57,8 @@ const routes: Routes = [
     SeatSelectionComponent,
     SpaceFlightPipe,
     TicketInformationComponent,
-    SeatAuctionComponent
+    SeatAuctionComponent,
+    TicketSearchComponent
   ],
   imports: [
     BrowserModule,
