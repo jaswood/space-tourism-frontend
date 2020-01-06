@@ -22,3 +22,6 @@ steps:
 
 - script: ng build --prod
   displayName: Build
+
+- script: ng test --watch=false
+displayName: 'Tests'

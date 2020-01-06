@@ -38,7 +38,7 @@ export class SelectFlightComponent implements OnInit {
       data.spaceFlights.subscribe(data => {this.spaceFlights = data;});
     }
 
-    if (window.history.state.data != undefined) {
+    if (window.history.state != undefined) {
       this.ticketNumber = window.history.state.data.ticketNumber;
       this.openBoughtTicket();
     }

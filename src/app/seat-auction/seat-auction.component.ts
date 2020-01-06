@@ -25,7 +25,6 @@ export class SeatAuctionComponent implements OnInit, OnChanges {
   noOfBidders: number;
   startBidding: boolean;
 
-  notEnough: boolean = false;
   biddingDuration = 10;
   lastBid: number = 0;
   showWin = false;
@@ -38,7 +37,6 @@ export class SeatAuctionComponent implements OnInit, OnChanges {
     this.timeRemainingSub = this.seatAuctionService.timeRemainingToBid
       .subscribe(time => { 
         this.timeRemaining = time;
-        console.log(this.timeRemaining <= 0);
         if(this.timeRemaining <= 0)
         {
           if(this.lastBid == this.highestBid)

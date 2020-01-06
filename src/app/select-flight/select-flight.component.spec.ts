@@ -7,6 +7,7 @@ import { FlightDetailsComponent } from '../flight-details/flight-details.compone
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { MockActivatedRoute } from '../mocks/MockActivatedRoute';
+import { MatSnackBarModule } from '@angular/material';
 
 describe('SelectFlightComponent', () => {
   let component: SelectFlightComponent;
@@ -21,6 +22,7 @@ describe('SelectFlightComponent', () => {
       ],
       imports: [
         HttpClientModule,
+        MatSnackBarModule
       ],
       providers: [
         { provide: ActivatedRoute, useValue: MockActivatedRoute }
