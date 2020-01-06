@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SeatsService } from './services/seats.service';
-import { Subscription, empty } from 'rxjs';
-import { startWith } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { Seat } from 'src/models/seat';
 import { Ticket } from 'src/models/ticket';
 import { SpaceFlight } from 'src/models/spaceFlight';
 import { Spaceship } from 'src/models/spaceship';
 import { SeatColumn } from 'src/models/seatColumn';
-import { TicketInformationService } from '../ticket-information/services/ticket-information.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-seat-selection',
@@ -15,14 +14,13 @@ import { TicketInformationService } from '../ticket-information/services/ticket-
   styleUrls: ['./seat-selection.component.css']
 })
 export class SeatSelectionComponent implements OnInit, OnDestroy {
-  private noOfBiddersSub: Subscription;
   private othersReadyToAuctionSub: Subscription;
-  private beginAuctionSub: Subscription;
   noOfBidders: number;
   othersReadyToAuction: boolean;
-  beginAuction: boolean;
+  beginAuction: boolean = false;
 
-
+  auctionThreshold = 10;
+  showAuctionOptions: boolean = false;
   ticket: Ticket = new Ticket();
   columnsOfSeats: SeatColumn[] = [];
   noOfColumns: number;
@@ -31,7 +29,7 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
   selectedSeats = new Set<Seat>(); 
 
   constructor(private seatService: SeatsService,
-    private ticketService: TicketInformationService) { }
+    private router: Router) { }
 
   ngOnInit() {
     //get ticket info form routing history
@@ -43,7 +41,7 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
       this.ticket.spaceFlight.ship = new Spaceship();
       this.ticket.spaceFlight.arrivalDate = new Date(Date.now());
       this.ticket.spaceFlight.departureDate = new Date(Date.now());
-      this.ticket.spaceFlight.availableSeats = 20;
+      this.ticket.spaceFlight.availableSeats = 2;
       this.ticket.spaceFlight.flightNumber = "MUN001";
       this.ticket.spaceFlight.destination = "etx";
       this.ticket.spaceFlight.leavingLocation = "etx2";
@@ -60,31 +58,27 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
       this.ticket.dob = new Date(Date.now());
     }
 
+    if(this.ticket.spaceFlight.availableSeats < this.auctionThreshold){
+      this.showAuctionOptions = true;
+      this.ticket.seatQuantity = 0;
+    }
+
     this.noOfColumns = this.calculateNumberOfColumns();
     this.columnsOfSeats = new Array<SeatColumn>(this.noOfColumns);
     this.setUpSeats();
     this.assignReservedSeats();
 
-    this.noOfBiddersSub = this.seatService.noOfBidders
-      .subscribe(noOfBidders => this.noOfBidders = noOfBidders );
     this.othersReadyToAuctionSub = this.seatService.othersReadyToAuction
       .subscribe(ready => this.othersReadyToAuction = ready);
-    this.beginAuctionSub = this.seatService.beginAuction
-      .subscribe(begin => this.beginAuction = begin);
   }
 
   ngOnDestroy() {
-    this.noOfBiddersSub.unsubscribe();
     this.othersReadyToAuctionSub.unsubscribe();
-    this.beginAuctionSub.unsubscribe();
   }
 
-  testSockets() {
+  joinAuction() {
     this.seatService.registerFlightAuction(this.ticket.spaceFlight.flightNumber);
-  }
-
-  readyToAuction() {
-    this.seatService.readyToAuction();
+    this.beginAuction = true;
   }
 
   selectSeat(seat: Seat, columnIndex: number, seatIndex: number) {
@@ -161,7 +155,9 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
     this.ticket.flightNumber = this.ticket.spaceFlight.flightNumber;
     this.ticket.ticketNumber = this.generateTicketNumber();
     console.log(this.ticket);
-    this.seatService.postTicket(this.ticket).subscribe();
+    this.seatService.postTicket(this.ticket).subscribe(() => {
+      this.router.navigateByUrl('');
+    });
   }
 
   //generate a ticket number
@@ -172,6 +168,7 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
 
   closeAuction() {
     console.log('here');
+    this.showAuctionOptions = false;
     this.beginAuction = false;
   }
 

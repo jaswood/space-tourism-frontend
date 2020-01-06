@@ -12,7 +12,6 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SeatsService {
-  noOfBidders = this.socket.fromEvent<number>('noOfBidders');
   othersReadyToAuction = this.socket.fromEvent<boolean>('otherPlayersReady');
   beginAuction = this.socket.fromEvent<boolean>('beginAuction');
 
@@ -21,10 +20,6 @@ export class SeatsService {
 
     registerFlightAuction(flightNo: string){
     this.socket.emit('registerForFlightAuction', flightNo);
-  }
-
-  readyToAuction(){
-    this.socket.emit('readyToAuction');
   }
 
   postTicket(ticket: Ticket): Observable<Ticket> {

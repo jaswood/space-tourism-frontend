@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { SeatAuctionService } from './services/seat-auction.service';
 import { Subscription } from 'rxjs';
 
@@ -9,44 +9,56 @@ import { Subscription } from 'rxjs';
 })
 export class SeatAuctionComponent implements OnInit, OnChanges {
   @Input() beginAuction: boolean;
+  @Output() availableSeatReward = new EventEmitter<number>();
 
+
+  startBiddingSub: Subscription;
+  noOfBiddersSub: Subscription;
   timeRemainingSub: Subscription;
   endAuctionSub: Subscription;
   highestBidSub: Subscription;
   biddingHistorySub: Subscription;
-  timeRemaining: number;
+  timeRemaining: number =20;
   endAuction: boolean;
   highestBid: number = 0;
   biddingHistory: number[];
+  noOfBidders: number;
+  startBidding: boolean;
 
   notEnough: boolean = false;
+  biddingDuration = 10;
+  lastBid: number = 0;
+  showWin = false;
 
   constructor(private seatAuctionService: SeatAuctionService) { }
 
   ngOnInit() {
+    this.startBiddingSub =  this.seatAuctionService.beginAuction.subscribe(start => this.startBidding = start);
+
     this.timeRemainingSub = this.seatAuctionService.timeRemainingToBid
-      .subscribe(time => {
-      this.timeRemaining = time
-        console.log(this.timeRemaining)
+      .subscribe(time => { 
+        this.timeRemaining = time;
+        console.log(this.timeRemaining <= 0);
+        if(this.timeRemaining <= 0)
+        {
+          if(this.lastBid == this.highestBid)
+            this.collectReward();
+          this.seatAuctionService.closeAuction();
+          this.seatAuctionService.disconnect();
+        }
       });
 
     this.endAuctionSub = this.seatAuctionService.endAuction
-      .subscribe(end => {
-        this.endAuction = end;
-        console.log(this.endAuction)
-      });
+      .subscribe(end => this.endAuction = end);
 
     this.highestBidSub = this.seatAuctionService.newHighestBid
-      .subscribe(bid => {
-        this.highestBid = bid;
-        console.log(this.highestBid)
-      });
+      .subscribe(bid => this.highestBid = bid );
 
     this.biddingHistorySub = this.seatAuctionService.biddingHistory
-      .subscribe(hist => {
-        this.biddingHistory = hist;
-        console.log(this.biddingHistory)
-      });
+      .subscribe(hist => this.biddingHistory = hist);
+
+      this.noOfBiddersSub = this.seatAuctionService.noOfBidders
+      .subscribe(noOfBidders => this.noOfBidders = noOfBidders );
   }
 
   ngOnDestroy(): void {
@@ -54,6 +66,7 @@ export class SeatAuctionComponent implements OnInit, OnChanges {
     this.endAuctionSub.unsubscribe();
     this.biddingHistorySub.unsubscribe();
     this.highestBidSub.unsubscribe();
+    this.noOfBiddersSub.unsubscribe();
   }
 
   ngOnChanges(): void {
@@ -63,6 +76,16 @@ export class SeatAuctionComponent implements OnInit, OnChanges {
   }
 
   bid(amount) {
+    this.lastBid = amount;
     this.seatAuctionService.bid(amount);
+  }
+
+  clickStartBidding() {
+    this.seatAuctionService.readyToAuction();
+  }
+
+  collectReward() {
+    this.showWin = true;
+    this.availableSeatReward.emit(1);
   }
 }
