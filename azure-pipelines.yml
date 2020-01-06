@@ -23,7 +23,7 @@ steps:
 - script: ng build --prod
   displayName: Build
 
-- script: ng test --watch=false
+- script: ng test --watch=false --codeCoverage=true
   displayName: 'Tests'
 
 - task: PublishTestResults@2
@@ -32,3 +32,10 @@ steps:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/TEST-*.xml'
   displayName: 'publish test results'
+
+- task: PublishCodeCoverageResults@1
+  condition: succeededOrFailed()
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/coverage/space-tourism-app/cobertura-coverage.xml'
+  displayName: 'Publish Code Coverage Results'
