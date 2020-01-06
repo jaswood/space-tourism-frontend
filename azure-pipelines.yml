@@ -27,7 +27,7 @@ steps:
   displayName: 'Tests'
 
 - task: PublishTestResults@2
-  condition: succeedOrFailed()
+  condition: succeededOrFailed()
   inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/TEST-*.xml'
