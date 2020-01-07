@@ -1,36 +1,36 @@
 <?xml version="1.0"?>
-<testsuite name="HeadlessChrome 79.0.3945 (Windows 10.0.0)" package="" timestamp="2020-01-07T16:54:06" id="0" hostname="Joes-Computer" tests="26" errors="0" failures="0" time="0.861">
+<testsuite name="HeadlessChrome 79.0.3945 (Windows 10.0.0)" package="" timestamp="2020-01-07T20:19:07" id="0" hostname="Joes-Computer" tests="26" errors="0" failures="0" time="0.793">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/79.0.3945.0 Safari/537.36"/>
   </properties>
-  <testcase name="SpaceFlightPipe create an instance" time="0.002" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SpaceFlightPipe"/>
-  <testcase name="SpaceFlightPipe can filter spaceflights by ship" time="0.001" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SpaceFlightPipe"/>
-  <testcase name="SeatSelectionComponent setSeatColor Tests setSeatColor with color green correctly, expecting green (testCase: 1)" time="0.108" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent setSeatColor Tests"/>
-  <testcase name="SeatSelectionComponent setSeatColor Tests setSeatColor with color red correctly, expecting red (testCase: 2)" time="0.051" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent setSeatColor Tests"/>
-  <testcase name="SeatSelectionComponent setSeatSelect Tests selectSeat assign select with grey correctly, expecting darkgrey (testCase: 2)" time="0.037" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent setSeatSelect Tests"/>
-  <testcase name="SeatSelectionComponent setSeatSelect Tests selectSeat assign select with grey correctly, expecting grey (testCase: 1)" time="0.04" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent setSeatSelect Tests"/>
-  <testcase name="SeatSelectionComponent calculateNumberOfColumns Tests calculateNumberOfColumns with seats 0 correctly, expecting 0 (testCase: 3)" time="0.034" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent calculateNumberOfColumns Tests"/>
-  <testcase name="SeatSelectionComponent calculateNumberOfColumns Tests calculateNumberOfColumns with seats -1 correctly, expecting 0 (testCase: 4)" time="0.035" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent calculateNumberOfColumns Tests"/>
-  <testcase name="SeatSelectionComponent calculateNumberOfColumns Tests calculateNumberOfColumns with seats 50 correctly, expecting 10 (testCase: 2)" time="0.034" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent calculateNumberOfColumns Tests"/>
-  <testcase name="SeatSelectionComponent calculateNumberOfColumns Tests calculateNumberOfColumns with seats 20 correctly, expecting 4 (testCase: 1)" time="0.033" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent calculateNumberOfColumns Tests"/>
-  <testcase name="SeatSelectionComponent generateSeatCode Tests generateSeatCode with Seat Number -1 correctly, expecting  (testCase: 7)" time="0.029" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent generateSeatCode Tests"/>
-  <testcase name="SeatSelectionComponent generateSeatCode Tests generateSeatCode with Seat Number 4 correctly, expecting E (testCase: 5)" time="0.035" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent generateSeatCode Tests"/>
-  <testcase name="SeatSelectionComponent generateSeatCode Tests generateSeatCode with Seat Number 5 correctly, expecting  (testCase: 6)" time="0.03" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent generateSeatCode Tests"/>
-  <testcase name="SeatSelectionComponent generateSeatCode Tests generateSeatCode with Seat Number 2 correctly, expecting C (testCase: 3)" time="0.034" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent generateSeatCode Tests"/>
-  <testcase name="SeatSelectionComponent generateSeatCode Tests generateSeatCode with Seat Number 3 correctly, expecting D (testCase: 4)" time="0.031" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent generateSeatCode Tests"/>
-  <testcase name="SeatSelectionComponent generateSeatCode Tests generateSeatCode with Seat Number 0 correctly, expecting A (testCase: 1)" time="0.032" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent generateSeatCode Tests"/>
-  <testcase name="SeatSelectionComponent generateSeatCode Tests generateSeatCode with Seat Number 1 correctly, expecting B (testCase: 2)" time="0.031" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent generateSeatCode Tests"/>
-  <testcase name="SelectFlightService should be created" time="0.01" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SelectFlightService"/>
-  <testcase name="TicketInformationService should be created" time="0.007" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).TicketInformationService"/>
-  <testcase name="SelectFlightComponent should create" time="0.063" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SelectFlightComponent"/>
-  <testcase name="TicketInformationComponent should create" time="0.124" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).TicketInformationComponent"/>
-  <testcase name="TicketSearchComponent should create" time="0.016" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).TicketSearchComponent"/>
+  <testcase name="SelectFlightService should be created" time="0.03" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SelectFlightService"/>
+  <testcase name="AppComponent should have as title 'space-tourism-app'" time="0.044" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).AppComponent"/>
   <testcase name="AppComponent should render title" time="0" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).AppComponent">
     <skipped/>
   </testcase>
-  <testcase name="AppComponent should have as title 'space-tourism-app'" time="0.015" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).AppComponent"/>
-  <testcase name="AppComponent should create the app" time="0.012" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).AppComponent"/>
-  <testcase name="FlightDetailsComponent should create" time="0.017" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).FlightDetailsComponent"/>
+  <testcase name="AppComponent should create the app" time="0.019" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).AppComponent"/>
+  <testcase name="SeatSelectionComponent calculateNumberOfColumns Tests calculateNumberOfColumns with seats 50 correctly, expecting 10 (testCase: 2)" time="0.07" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent calculateNumberOfColumns Tests"/>
+  <testcase name="SeatSelectionComponent calculateNumberOfColumns Tests calculateNumberOfColumns with seats 0 correctly, expecting 0 (testCase: 3)" time="0.037" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent calculateNumberOfColumns Tests"/>
+  <testcase name="SeatSelectionComponent calculateNumberOfColumns Tests calculateNumberOfColumns with seats -1 correctly, expecting 0 (testCase: 4)" time="0.041" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent calculateNumberOfColumns Tests"/>
+  <testcase name="SeatSelectionComponent calculateNumberOfColumns Tests calculateNumberOfColumns with seats 20 correctly, expecting 4 (testCase: 1)" time="0.027" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent calculateNumberOfColumns Tests"/>
+  <testcase name="SeatSelectionComponent generateSeatCode Tests generateSeatCode with Seat Number 1 correctly, expecting B (testCase: 2)" time="0.029" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent generateSeatCode Tests"/>
+  <testcase name="SeatSelectionComponent generateSeatCode Tests generateSeatCode with Seat Number 4 correctly, expecting E (testCase: 5)" time="0.035" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent generateSeatCode Tests"/>
+  <testcase name="SeatSelectionComponent generateSeatCode Tests generateSeatCode with Seat Number 2 correctly, expecting C (testCase: 3)" time="0.026" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent generateSeatCode Tests"/>
+  <testcase name="SeatSelectionComponent generateSeatCode Tests generateSeatCode with Seat Number 5 correctly, expecting  (testCase: 6)" time="0.028" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent generateSeatCode Tests"/>
+  <testcase name="SeatSelectionComponent generateSeatCode Tests generateSeatCode with Seat Number 3 correctly, expecting D (testCase: 4)" time="0.026" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent generateSeatCode Tests"/>
+  <testcase name="SeatSelectionComponent generateSeatCode Tests generateSeatCode with Seat Number -1 correctly, expecting  (testCase: 7)" time="0.024" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent generateSeatCode Tests"/>
+  <testcase name="SeatSelectionComponent generateSeatCode Tests generateSeatCode with Seat Number 0 correctly, expecting A (testCase: 1)" time="0.025" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent generateSeatCode Tests"/>
+  <testcase name="SeatSelectionComponent setSeatColor Tests setSeatColor with color green correctly, expecting green (testCase: 1)" time="0.032" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent setSeatColor Tests"/>
+  <testcase name="SeatSelectionComponent setSeatColor Tests setSeatColor with color red correctly, expecting red (testCase: 2)" time="0.024" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent setSeatColor Tests"/>
+  <testcase name="SeatSelectionComponent setSeatSelect Tests selectSeat assign select with grey correctly, expecting darkgrey (testCase: 2)" time="0.03" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent setSeatSelect Tests"/>
+  <testcase name="SeatSelectionComponent setSeatSelect Tests selectSeat assign select with grey correctly, expecting grey (testCase: 1)" time="0.025" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SeatSelectionComponent setSeatSelect Tests"/>
+  <testcase name="TicketInformationService should be created" time="0.007" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).TicketInformationService"/>
+  <testcase name="SelectFlightComponent should create" time="0.06" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SelectFlightComponent"/>
+  <testcase name="TicketInformationComponent should create" time="0.119" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).TicketInformationComponent"/>
+  <testcase name="TicketSearchComponent should create" time="0.017" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).TicketSearchComponent"/>
+  <testcase name="SpaceFlightPipe create an instance" time="0" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SpaceFlightPipe"/>
+  <testcase name="SpaceFlightPipe can filter spaceflights by ship" time="0" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).SpaceFlightPipe"/>
+  <testcase name="FlightDetailsComponent should create" time="0.018" classname="HeadlessChrome_79_0_3945_(Windows_10_0_0).FlightDetailsComponent"/>
   <system-out>
     <![CDATA[
 ]]>

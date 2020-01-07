@@ -26,13 +26,6 @@ describe('SeatSelectionComponent', () => {
     .compileComponents();
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SeatSelectionComponent);
-    component = fixture.componentInstance;
-
-    fixture.detectChanges();
-  });
-
   let ships: Spaceship[] = [
     {
       nameCode: 'Falcon 9',
@@ -99,6 +92,15 @@ describe('SeatSelectionComponent', () => {
     seatNo: 0,
     seatCode: 'B'
   }
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(SeatSelectionComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    component.ticket = new Ticket();
+    component.ticket = ticket;
+  });
+  
 
   describe('calculateNumberOfColumns Tests', () => {
     const testCases = [
