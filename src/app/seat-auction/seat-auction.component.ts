@@ -18,7 +18,7 @@ export class SeatAuctionComponent implements OnInit, OnChanges {
   endAuctionSub: Subscription;
   highestBidSub: Subscription;
   biddingHistorySub: Subscription;
-  timeRemaining: number =20;
+  timeRemaining: number = 20;
   endAuction: boolean;
   highestBid: number = 0;
   biddingHistory: number[];
@@ -39,7 +39,7 @@ export class SeatAuctionComponent implements OnInit, OnChanges {
         this.timeRemaining = time;
         if(this.timeRemaining <= 0)
         {
-          if(this.lastBid == this.highestBid)
+          if(this.lastBid == this.highestBid && this.highestBid != 0)
             this.collectReward();
           this.seatAuctionService.closeAuction();
           this.seatAuctionService.disconnect();
@@ -47,7 +47,7 @@ export class SeatAuctionComponent implements OnInit, OnChanges {
       });
 
     this.endAuctionSub = this.seatAuctionService.endAuction
-      .subscribe(end => this.endAuction = end);
+      .subscribe(end => this.endAuction = true);
 
     this.highestBidSub = this.seatAuctionService.newHighestBid
       .subscribe(bid => this.highestBid = bid );
@@ -74,8 +74,10 @@ export class SeatAuctionComponent implements OnInit, OnChanges {
   }
 
   bid(amount) {
-    this.lastBid = amount;
-    this.seatAuctionService.bid(amount);
+    if(amount != this.highestBid){
+      this.lastBid = amount;
+      this.seatAuctionService.bid(amount);
+    }
   }
 
   clickStartBidding() {

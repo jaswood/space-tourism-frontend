@@ -27,7 +27,7 @@ export class SeatAuctionService {
   }
 
   disconnect(){
-    this.socket.emit('disconnect');
+    this.socket.emit('closeAuctionDisconnect');
   }
 
 }

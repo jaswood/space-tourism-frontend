@@ -26,39 +26,40 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
   noOfColumns: number;
   numberOfSeatsInARow = 5;
   //sets are better for looking for values way faster than arrays and easier to work with set.has()
-  selectedSeats = new Set<Seat>(); 
+  selectedSeats = new Set<Seat>();
 
   constructor(private seatService: SeatsService,
     private router: Router) { }
 
   ngOnInit() {
     //get ticket info form routing history
-    if (window.history.state.data != undefined) {
-      this.ticket = window.history.state.data.ticket;
-    }
-    else {
-      this.ticket.spaceFlight = new SpaceFlight();
-      this.ticket.spaceFlight.ship = new Spaceship();
-      this.ticket.spaceFlight.arrivalDate = new Date(Date.now());
-      this.ticket.spaceFlight.departureDate = new Date(Date.now());
-      this.ticket.spaceFlight.availableSeats = 2;
-      this.ticket.spaceFlight.flightNumber = "MUN001";
-      this.ticket.spaceFlight.destination = "etx";
-      this.ticket.spaceFlight.leavingLocation = "etx2";
-      this.ticket.spaceFlight.gate = "1";
-      this.ticket.spaceFlight.ship.nameCode = "1ooo";
-      this.ticket.spaceFlight.ship.noOfRows = 5;
-      this.ticket.spaceFlight.ship.totalSeats = 40;
-      this.ticket.spaceFlight.ship.age = 1;
-      this.ticket.spaceFlight.ship.maxSpeed = 1000;
-      this.ticket.seatQuantity = 2;
-      this.ticket.firstName = 'k';
-      this.ticket.lastName = 'j';
-      this.ticket.emailAddress = 'alkkaj';
-      this.ticket.dob = new Date(Date.now());
+    if (window.history.state != undefined) {
+      if (window.history.state.data != undefined)
+        this.ticket = window.history.state.data.ticket;
+      else {
+        this.ticket.spaceFlight = new SpaceFlight();
+        this.ticket.spaceFlight.ship = new Spaceship();
+        this.ticket.spaceFlight.arrivalDate = new Date(Date.now());
+        this.ticket.spaceFlight.departureDate = new Date(Date.now());
+        this.ticket.spaceFlight.availableSeats = 2;
+        this.ticket.spaceFlight.flightNumber = "MUN001";
+        this.ticket.spaceFlight.destination = "etx";
+        this.ticket.spaceFlight.leavingLocation = "etx2";
+        this.ticket.spaceFlight.gate = "1";
+        this.ticket.spaceFlight.ship.nameCode = "1ooo";
+        this.ticket.spaceFlight.ship.noOfRows = 5;
+        this.ticket.spaceFlight.ship.totalSeats = 40;
+        this.ticket.spaceFlight.ship.age = 1;
+        this.ticket.spaceFlight.ship.maxSpeed = 1000;
+        this.ticket.seatQuantity = 2;
+        this.ticket.firstName = 'k';
+        this.ticket.lastName = 'j';
+        this.ticket.emailAddress = 'alkkaj';
+        this.ticket.dob = new Date(Date.now());
+      }
     }
 
-    if(this.ticket.spaceFlight.availableSeats < this.auctionThreshold){
+    if (this.ticket.spaceFlight.availableSeats < this.auctionThreshold) {
       this.showAuctionOptions = true;
       this.ticket.seatQuantity = 0;
     }
@@ -68,12 +69,15 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
     this.setUpSeats();
     this.assignReservedSeats();
 
-    this.othersReadyToAuctionSub = this.seatService.othersReadyToAuction
-      .subscribe(ready => this.othersReadyToAuction = ready);
+    if (this.othersReadyToAuctionSub != undefined) {
+      this.othersReadyToAuctionSub = this.seatService.othersReadyToAuction
+        .subscribe(ready => this.othersReadyToAuction = ready);
+    }
   }
 
   ngOnDestroy() {
-    this.othersReadyToAuctionSub.unsubscribe();
+    if (this.othersReadyToAuctionSub != undefined)
+      this.othersReadyToAuctionSub.unsubscribe();
   }
 
   joinAuction() {
@@ -99,7 +103,10 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
   }
 
   calculateNumberOfColumns(): number {
-    return (this.ticket.spaceFlight.ship.totalSeats / this.numberOfSeatsInARow)
+    if (this.ticket.spaceFlight.ship.totalSeats > 0) {
+      return (this.ticket.spaceFlight.ship.totalSeats / this.numberOfSeatsInARow)
+    } else
+      return 0;
   }
 
   //creates the array of seats
@@ -122,10 +129,10 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
     //need to get the reserved seats from api first
     this.seatService.getReservedSeats(this.ticket.spaceFlight.flightNumber).subscribe((seats) => {
       for (let seat of seats) { //for each reservedseat check each columns every seat
-        this.columnsOfSeats.forEach(column => { 
+        this.columnsOfSeats.forEach(column => {
           for (let i = 0; i < column.seats.length; i++) {
             if (column.seats[i].seatNo === seat.seatNo && column.seats[i].seatCode === seat.seatCode) {
-              this.columnsOfSeats[seat.seatNo].seats[i].color = 'grey'; //change seat to reserved (grey)
+              this.setSeatColor('grey', seat.seatNo, i);
             }
           }
         });
@@ -146,6 +153,8 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
         return 'D';
       case 4:
         return 'E';
+      default:
+        return '';
     }
   }
 
@@ -154,9 +163,8 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
     this.ticket.seats = Array.from(this.selectedSeats);
     this.ticket.flightNumber = this.ticket.spaceFlight.flightNumber;
     this.ticket.ticketNumber = this.generateTicketNumber();
-    console.log(this.ticket);
     this.seatService.postTicket(this.ticket).subscribe(() => {
-      this.router.navigateByUrl('',  {state: {data: {ticketNumber: this.ticket.ticketNumber}}});
+      this.router.navigateByUrl('', { state: { data: { ticketNumber: this.ticket.ticketNumber } } });
     });
   }
 
@@ -167,10 +175,10 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
   }
 
   closeAuction() {
-    console.log('here');
     this.showAuctionOptions = false;
     this.beginAuction = false;
-    if(this.ticket.seatQuantity == 0) {
+    this.seatService.disconnect();
+    if (this.ticket.seatQuantity == 0) {
       this.router.navigateByUrl('');
     }
   }

@@ -21,7 +21,7 @@ export class FlightDetailsComponent implements OnInit, OnChanges {
     if(this.spaceFlight.availableSeats == 0)
       this.showActions = false;
     else
-       this.showActions = true;
+      this.showActions = true;
   }
 
   openTicketOrdering(value) {
