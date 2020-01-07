@@ -70,11 +70,6 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
       this.setUpSeats();
       this.assignReservedSeats();
     }
-
-    if (this.othersReadyToAuctionSub != undefined) {
-      this.othersReadyToAuctionSub = this.seatService.othersReadyToAuction
-        .subscribe(ready => this.othersReadyToAuction = ready);
-    }
   }
 
   ngOnDestroy() {

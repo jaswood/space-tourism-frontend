@@ -8,6 +8,7 @@
     <p><b>Customer Waiting to Bid:</b> {{noOfBidders}}</p>
 
     <button mat-raised-button (click)="clickStartBidding()">Start Bidding</button>
+    <span *ngIf="(othersReadyToAuction && startBidding == false)">Waiting for other customers to be ready</span>
 </div>
 <div *ngIf="startBidding">
     <h2 *ngIf="showWin">You Win!</h2>

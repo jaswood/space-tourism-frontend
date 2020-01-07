@@ -11,7 +11,7 @@ export class SeatAuctionComponent implements OnInit, OnChanges {
   @Input() beginAuction: boolean;
   @Output() availableSeatReward = new EventEmitter<number>();
 
-
+  othersReadyToAuctionSub: Subscription;
   startBiddingSub: Subscription;
   noOfBiddersSub: Subscription;
   timeRemainingSub: Subscription;
@@ -24,6 +24,7 @@ export class SeatAuctionComponent implements OnInit, OnChanges {
   biddingHistory: number[];
   noOfBidders: number;
   startBidding: boolean;
+  othersReadyToAuction: boolean = false;
 
   biddingDuration = 10;
   lastBid: number = 0;
@@ -57,6 +58,11 @@ export class SeatAuctionComponent implements OnInit, OnChanges {
 
       this.noOfBiddersSub = this.seatAuctionService.noOfBidders
       .subscribe(noOfBidders => this.noOfBidders = noOfBidders );
+
+      
+      this.othersReadyToAuctionSub = this.seatAuctionService.othersReadyToAuction
+        .subscribe(ready => this.othersReadyToAuction = ready);
+      
   }
 
   ngOnDestroy(): void {
@@ -65,6 +71,7 @@ export class SeatAuctionComponent implements OnInit, OnChanges {
     this.biddingHistorySub.unsubscribe();
     this.highestBidSub.unsubscribe();
     this.noOfBiddersSub.unsubscribe();
+    this.othersReadyToAuctionSub.unsubscribe();
   }
 
   ngOnChanges(): void {
