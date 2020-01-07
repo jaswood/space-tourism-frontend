@@ -17,7 +17,7 @@
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <mat-form-field>
-            <input #ppNo matInput placeholder="Passport Number" (keyup)="passportNoOnKey(ppNo.value)" formControlName="passport" required>
+            <input #ppNo type="number" matInput placeholder="Passport Number" (keyup)="passportNoOnKey(ppNo.value)" formControlName="passport" required>
         </mat-form-field>
         <mat-form-field>
             <input #emailAddress matInput placeholder="Enter email" (keyup)="emailAddressOnKey(emailAddress.value)"
