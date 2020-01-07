@@ -12,8 +12,6 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SeatsService {
-
-  othersReadyToAuction = this.socket.fromEvent<boolean>('otherPlayersReady');
   beginAuction = this.socket.fromEvent<boolean>('beginAuction');
 
   constructor(private socket: Socket,

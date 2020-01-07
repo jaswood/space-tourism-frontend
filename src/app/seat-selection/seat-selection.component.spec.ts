@@ -17,13 +17,13 @@ describe('SeatSelectionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SeatSelectionComponent ],
-      imports: [ RouterTestingModule ],
-      providers: [ {provide: SeatsService, useClass: MockSeatService}],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+      declarations: [SeatSelectionComponent],
+      imports: [RouterTestingModule],
+      providers: [{ provide: SeatsService, useClass: MockSeatService }],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   let ships: Spaceship[] = [
@@ -45,11 +45,11 @@ describe('SeatSelectionComponent', () => {
       fuelCapacity: 0,
       totalSeats: 0
     }
-  ] 
+  ]
 
   let flights: SpaceFlight[] = [
     {
-      arrivalDate:  new Date(Date.now()),
+      arrivalDate: new Date(Date.now()),
       departureDate: new Date(Date.now()),
       destination: 'Moon',
       flightNumber: 'Mun1',
@@ -59,7 +59,7 @@ describe('SeatSelectionComponent', () => {
       availableSeats: 10
     },
     {
-      arrivalDate:  new Date(Date.now()),
+      arrivalDate: new Date(Date.now()),
       departureDate: new Date(Date.now()),
       destination: 'Mars',
       flightNumber: 'Mun2',
@@ -100,14 +100,14 @@ describe('SeatSelectionComponent', () => {
     component.ticket = new Ticket();
     component.ticket = ticket;
   });
-  
+
 
   describe('calculateNumberOfColumns Tests', () => {
     const testCases = [
-      {seats: 20, expect: 4},
-      {seats: 50, expect: 10},
-      {seats: 0, expect: 0},
-      {seats: -1, expect: 0}
+      { seats: 20, expect: 4 },
+      { seats: 50, expect: 10 },
+      { seats: 0, expect: 0 },
+      { seats: -1, expect: 0 }
     ];
 
     testCases.forEach((test, index) => {
@@ -121,15 +121,15 @@ describe('SeatSelectionComponent', () => {
 
   describe('generateSeatCode Tests', () => {
     const testCases = [
-      {seatNo: 0, expect: 'A'},
-      {seatNo: 1, expect: 'B'},
-      {seatNo: 2, expect: 'C'},
-      {seatNo: 3, expect: 'D'},
-      {seatNo: 4, expect: 'E'},
-      {seatNo: 5, expect: ''},
-      {seatNo: -1, expect: ''},
+      { seatNo: 0, expect: 'A' },
+      { seatNo: 1, expect: 'B' },
+      { seatNo: 2, expect: 'C' },
+      { seatNo: 3, expect: 'D' },
+      { seatNo: 4, expect: 'E' },
+      { seatNo: 5, expect: '' },
+      { seatNo: -1, expect: '' },
     ];
-    testCases.forEach((test,index) => { 
+    testCases.forEach((test, index) => {
       it(`generateSeatCode with Seat Number ${test.seatNo} correctly, expecting ${test.expect} (testCase: ${index + 1})`, () => {
         expect(component.generateSeatCode(test.seatNo)).toEqual(test.expect);
       });
@@ -138,10 +138,10 @@ describe('SeatSelectionComponent', () => {
 
   describe('setSeatColor Tests', () => {
     const testCases = [
-      {colour: 'green', columnInTestModel: 0, rowInTestModel: 0, expect: 'green'},
-      {colour: 'red', columnInTestModel: 0, rowInTestModel: 0, expect: 'red'}
+      { colour: 'green', columnInTestModel: 0, rowInTestModel: 0, expect: 'green' },
+      { colour: 'red', columnInTestModel: 0, rowInTestModel: 0, expect: 'red' }
     ];
-    
+
     beforeEach(() => {
       let columns = new SeatColumn();
       columns.columnNumber = 0;
@@ -166,10 +166,10 @@ describe('SeatSelectionComponent', () => {
 
   describe('setSeatSelect Tests', () => {
     const testCases = [
-      {colour: 'grey', columnInTestModel: 0, rowInTestModel: 0, expect: 'grey'},
-      {colour: 'grey', columnInTestModel: 0, rowInTestModel: 1, expect: 'darkgrey'}
+      { colour: 'grey', columnInTestModel: 0, rowInTestModel: 0, expect: 'grey' },
+      { colour: 'grey', columnInTestModel: 0, rowInTestModel: 1, expect: 'darkgrey' }
     ];
-    
+
     let columns = new SeatColumn();
 
     beforeEach(() => {
@@ -196,5 +196,4 @@ describe('SeatSelectionComponent', () => {
       seat2.color = 'grey';
     });
   });
-
 });

@@ -13,7 +13,7 @@
             <br />
             <p><b>Available Seats:</b> {{spaceFlight.availableSeats}}</p>
 
-            <button  *ngIf="showActions" mat-raised-button (click)="openTicketOrdering(true)"> Tickets </button>
+            <button  *ngIf="ticketsBeingOrdered" mat-raised-button (click)="openTicketOrdering(true)"> Tickets </button>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>

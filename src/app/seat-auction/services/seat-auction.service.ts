@@ -5,6 +5,7 @@ import { Socket } from 'ngx-socket-io';
   providedIn: 'root'
 })
 export class SeatAuctionService {
+  othersReadyToAuction = this.socket.fromEvent<boolean>('otherPlayersReady');
   noOfBidders = this.socket.fromEvent<number>('noOfBidders');
   timeRemainingToBid = this.socket.fromEvent<number>('timeRemaining');
   endAuction = this.socket.fromEvent<boolean>('endAuction');
