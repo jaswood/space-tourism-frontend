@@ -191,7 +191,7 @@ describe('SeatSelectionComponent', () => {
       });
     });
 
-    afterAll(() => {
+    afterEach(() => {
       seat1.color = 'grey';
       seat2.color = 'grey';
     });
