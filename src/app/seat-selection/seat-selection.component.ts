@@ -59,15 +59,17 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
       }
     }
 
-    if (this.ticket.spaceFlight.availableSeats < this.auctionThreshold) {
-      this.showAuctionOptions = true;
-      this.ticket.seatQuantity = 0;
+    if (this.ticket.spaceFlight != undefined) {
+      if (this.ticket.spaceFlight.availableSeats < this.auctionThreshold) {
+        this.showAuctionOptions = true;
+        this.ticket.seatQuantity = 0;
+      }  
+      
+      this.noOfColumns = this.calculateNumberOfColumns();
+      this.columnsOfSeats = new Array<SeatColumn>(this.noOfColumns);
+      this.setUpSeats();
+      this.assignReservedSeats();
     }
-
-    this.noOfColumns = this.calculateNumberOfColumns();
-    this.columnsOfSeats = new Array<SeatColumn>(this.noOfColumns);
-    this.setUpSeats();
-    this.assignReservedSeats();
 
     if (this.othersReadyToAuctionSub != undefined) {
       this.othersReadyToAuctionSub = this.seatService.othersReadyToAuction
