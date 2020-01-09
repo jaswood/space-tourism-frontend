@@ -4,8 +4,13 @@
         <p><b>Flight Number:</b> {{ticket.flightNumber}}</p>
         <p><b>passportNumber:</b> {{ticket.passportNumber}}</p>
         <p><b>emailAddress:</b> {{ticket.emailAddress}}</p>
-        <p><b>Seats:</b> <span *ngFor="let seat of ticket.seats;index as i">
-            {{seat.seatNo}}{{seat.seatCode}},
+        <p><b>Seats:</b> <span *ngFor="let seat of ticket.seats;index as i; last as isLast">
+            <ng-container *ngIf="!isLast">
+                {{seat.seatNo}}{{seat.seatCode}},
+            </ng-container>
+            <ng-container *ngIf="isLast">
+                {{seat.seatNo}}{{seat.seatCode}}
+            </ng-container>
         </span>
         </p>
     </div>

@@ -3,7 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { SeatSelectionComponent } from './seat-selection.component';
 import { SeatsService } from './services/seats.service';
-import { MockSeatService } from '../mocks/MockSeatService';
+import { MockSeatService } from '../../mocks/MockSeatService';
 import { SpaceFlight } from 'src/models/spaceFlight';
 import { Spaceship } from 'src/models/spaceship';
 import { Ticket } from 'src/models/ticket';
@@ -119,7 +119,7 @@ describe('SeatSelectionComponent', () => {
     });
   });
 
-  describe('generateSeatCode Tests', () => {
+  describe('generateSeatCodeLetter Tests', () => {
     const testCases = [
       { seatNo: 0, expect: 'A' },
       { seatNo: 1, expect: 'B' },
@@ -131,7 +131,22 @@ describe('SeatSelectionComponent', () => {
     ];
     testCases.forEach((test, index) => {
       it(`generateSeatCode with Seat Number ${test.seatNo} correctly, expecting ${test.expect} (testCase: ${index + 1})`, () => {
-        expect(component.generateSeatCode(test.seatNo)).toEqual(test.expect);
+        expect(component.generateSeatCodeLetter(test.seatNo)).toEqual(test.expect);
+      });
+    })
+  });
+
+  describe('generateSeatCodeNumber Tests', () => {
+    const testCases = [
+      { expect: 0, seatLetter: 'A' },
+      { expect: 1, seatLetter: 'B' },
+      { expect: 2, seatLetter: 'C' },
+      { expect: 3, seatLetter: 'D' },
+      { expect: 4, seatLetter: 'E' },
+    ];
+    testCases.forEach((test, index) => {
+      it(`generateSeatCode with Seat Number ${test.seatLetter} correctly, expecting ${test.expect} (testCase: ${index + 1})`, () => {
+        expect(component.generateSeatCodeNumber(test.seatLetter)).toEqual(test.expect);
       });
     })
   });

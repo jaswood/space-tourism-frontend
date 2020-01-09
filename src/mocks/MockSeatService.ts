@@ -12,4 +12,8 @@ export class MockSeatService {
         }]; 
         return of(seats)
     }
+
+    reserveSeat(seats) { };
+
+    unreserveSeat(seat) { };
 }

@@ -16,6 +16,8 @@ export class TicketInformationComponent implements OnInit {
 
   maxDate = new Date();
   ticket = new Ticket();
+
+  //assigning validation for the form controls
   form = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),

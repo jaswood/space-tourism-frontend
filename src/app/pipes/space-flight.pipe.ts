@@ -6,6 +6,8 @@ import { FlightSearch } from 'src/models/flightSearch';
   name: 'spaceFlight',
   pure: false
 })
+
+//Pipe is used during selectFlight HTML to filter search results
 export class SpaceFlightPipe implements PipeTransform {
 
   transform(flights: SpaceFlight[], filter: FlightSearch): any {

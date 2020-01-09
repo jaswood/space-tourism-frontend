@@ -1,4 +1,5 @@
 <mat-grid-list cols="3" rowHeight="400px">
+    <!-- search tile -->
     <mat-grid-tile>
         <mat-card>
             <mat-form-field>
@@ -21,8 +22,8 @@
         </mat-card>
     </mat-grid-tile>
 
+    <!-- flights available tile -->
     <mat-grid-tile>
-
         <mat-card>
             <mat-label><u>Flights Available:</u></mat-label>
             <mat-list role="list">
@@ -40,6 +41,7 @@
         </mat-card>
     </mat-grid-tile>
 
+    <!-- ticket search card -->
     <mat-grid-tile>
         <mat-card class="ticketSearchCard">
             <mat-label><u>Search for your ticket:</u></mat-label>
@@ -55,11 +57,13 @@
         </mat-card>
     </mat-grid-tile>
 
+    <!-- using the selected flight Component ordering tickets button turned on -->
     <mat-grid-tile colspan="3">
         <app-flight-details [spaceFlight]="selectedFlight" [ticketsBeingOrdered]="true"
-            (orderTickets)="orderingTickets = !orderingTickets"></app-flight-details>
+            (orderTickets)="orderingTickets = !orderingTickets"></app-flight-details> <!--The child component emits an event the parent listens to-->
     </mat-grid-tile>
 
+    <!-- modal for setting ticket details uses ticket information component -->
 </mat-grid-list>
 <div *ngIf="orderingTickets" class="ticketInfo">
     <div class="ticketInfoContent">
