@@ -107,7 +107,8 @@ describe('SeatSelectionComponent', () => {
       { seats: 20, expect: 4 },
       { seats: 50, expect: 10 },
       { seats: 0, expect: 0 },
-      { seats: -1, expect: 0 }
+      { seats: -1, expect: 0 },
+      { seats: 1, expect: 1 }
     ];
 
     testCases.forEach((test, index) => {
@@ -212,4 +213,11 @@ describe('SeatSelectionComponent', () => {
       seat2.color = 'darkorange';
     });
   });
+
+  describe('generateTicketNumber Tests', () => {
+    it(`should return a ticket number beginning with T and have the flight number in it`, () => {
+      let ticketNumber = component.generateTicketNumber();
+      expect(ticketNumber).toContain('T'+ticket.flightNumber);
+    })
+  })
 });
