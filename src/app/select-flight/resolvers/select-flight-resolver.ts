@@ -7,6 +7,7 @@ import { empty, of } from 'rxjs';
     providedIn: 'root'
 })
 
+//resolvers load data before the page loads so that any data needed for page load is not undefined
 export class SelectFlightResolverService implements Resolve<any> {
 
     constructor(private SelectFlightService: SelectFlightService) { }

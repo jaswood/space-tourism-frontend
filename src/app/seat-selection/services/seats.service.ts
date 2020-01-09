@@ -12,13 +12,22 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SeatsService {
-  beginAuction = this.socket.fromEvent<boolean>('beginAuction');
+  reservedSeating = this.socket.fromEvent<Seat[]>('seatsBeingReserved');
+  unreservingSeat = this.socket.fromEvent<Seat>('unreserveSeat');
 
   constructor(private socket: Socket,
     private http: HttpClient) { }
 
     registerFlightAuction(flightNo: string){
     this.socket.emit('registerForFlightAuction', flightNo);
+  }
+
+  reserveSeat(seats: Seat[]){
+    this.socket.emit('reservingSeats', seats);
+  }
+
+  unReserveSeat(seat: Seat){
+    this.socket.emit('unreservingSeats', seat);
   }
 
   disconnect() {
@@ -32,6 +41,7 @@ export class SeatsService {
       );
   }
 
+  //mapping the array of seat to remove the colouring
   getReservedSeats(flightNumber: string): Observable<Seat[]> {
     return this.http.get(environment.url + `/seats/reserved/${flightNumber}`)
       .pipe(

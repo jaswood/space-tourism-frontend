@@ -6,7 +6,7 @@ import { SpaceFlightPipe } from '../pipes/space-flight.pipe';
 import { FlightDetailsComponent } from '../flight-details/flight-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { MockActivatedRoute } from '../mocks/MockActivatedRoute';
+import { MockActivatedRoute } from '../../mocks/MockActivatedRoute';
 import { MatSnackBarModule } from '@angular/material';
 
 describe('SelectFlightComponent', () => {

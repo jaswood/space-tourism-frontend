@@ -14,11 +14,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./seat-selection.component.css']
 })
 export class SeatSelectionComponent implements OnInit, OnDestroy {
-  private othersReadyToAuctionSub: Subscription;
-  noOfBidders: number;
-  othersReadyToAuction: boolean;
-  beginAuction: boolean = false;
+  beingReservedSeatsSub: Subscription;
+  unreservedSeatSub: Subscription;
 
+  beginAuction: boolean = false;
   auctionThreshold = 10;
   showAuctionOptions: boolean = false;
   ticket: Ticket = new Ticket();
@@ -36,35 +35,27 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
     if (window.history.state != undefined) {
       if (window.history.state.data != undefined)
         this.ticket = window.history.state.data.ticket;
-      else {
-        this.ticket.spaceFlight = new SpaceFlight();
-        this.ticket.spaceFlight.ship = new Spaceship();
-        this.ticket.spaceFlight.arrivalDate = new Date(Date.now());
-        this.ticket.spaceFlight.departureDate = new Date(Date.now());
-        this.ticket.spaceFlight.availableSeats = 2;
-        this.ticket.spaceFlight.flightNumber = "MUN001";
-        this.ticket.spaceFlight.destination = "etx";
-        this.ticket.spaceFlight.leavingLocation = "etx2";
-        this.ticket.spaceFlight.gate = "1";
-        this.ticket.spaceFlight.ship.nameCode = "1ooo";
-        this.ticket.spaceFlight.ship.noOfRows = 5;
-        this.ticket.spaceFlight.ship.totalSeats = 40;
-        this.ticket.spaceFlight.ship.age = 1;
-        this.ticket.spaceFlight.ship.maxSpeed = 1000;
-        this.ticket.seatQuantity = 2;
-        this.ticket.firstName = 'k';
-        this.ticket.lastName = 'j';
-        this.ticket.emailAddress = 'alkkaj';
-        this.ticket.dob = new Date(Date.now());
-      }
     }
 
     if (this.ticket.spaceFlight != undefined) {
+
       if (this.ticket.spaceFlight.availableSeats < this.auctionThreshold) {
         this.showAuctionOptions = true;
         this.ticket.seatQuantity = 0;
-      }  
-      
+      }
+
+      this.seatService.registerFlightAuction(this.ticket.spaceFlight.flightNumber);
+
+      this.beingReservedSeatsSub = this.seatService.reservedSeating.subscribe((seats) => {
+        seats.forEach((seat) => {
+          this.setSeatColor('grey', seat.seatNo, this.generateSeatCodeNumber(seat.seatCode));
+        });
+      });
+
+      this.unreservedSeatSub = this.seatService.unreservingSeat.subscribe((seat) => {
+        this.setSeatColor('darkgrey', seat.seatNo, this.generateSeatCodeNumber(seat.seatCode));
+      });
+
       this.noOfColumns = this.calculateNumberOfColumns();
       this.columnsOfSeats = new Array<SeatColumn>(this.noOfColumns);
       this.setUpSeats();
@@ -73,12 +64,13 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.othersReadyToAuctionSub != undefined)
-      this.othersReadyToAuctionSub.unsubscribe();
+    if(this.beingReservedSeatsSub != undefined){
+    this.beingReservedSeatsSub.unsubscribe();
+    this.unreservedSeatSub.unsubscribe()
+    }
   }
 
   joinAuction() {
-    this.seatService.registerFlightAuction(this.ticket.spaceFlight.flightNumber);
     this.beginAuction = true;
   }
 
@@ -86,10 +78,12 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
     //if the seat is already in the array then delete if clicked again
     if (this.selectedSeats.has(seat)) {
       this.selectedSeats.delete(seat);
+      this.seatService.unReserveSeat(seat); //unreserving the seat on peers
       this.setSeatColor('darkgrey', columnIndex, seatIndex);
     }
     else if (this.selectedSeats.size < this.ticket.seatQuantity && seat.color !== 'grey') { //grey === reserverd
       this.selectedSeats.add(seat);
+      this.seatService.reserveSeat(Array.from(this.selectedSeats)); //reserving seat on peers
       this.setSeatColor('darkorange', columnIndex, seatIndex);
     }
   }
@@ -99,9 +93,17 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
     this.columnsOfSeats[column].seats[row].color = color;
   }
 
+  //calculate the number of columns of seats
   calculateNumberOfColumns(): number {
     if (this.ticket.spaceFlight.ship.totalSeats > 0) {
-      return (this.ticket.spaceFlight.ship.totalSeats / this.numberOfSeatsInARow)
+
+      if ((this.ticket.spaceFlight.ship.totalSeats / this.numberOfSeatsInARow) >= 1) {
+        return this.ticket.spaceFlight.ship.totalSeats / this.numberOfSeatsInARow;
+      } else {
+        this.numberOfSeatsInARow = this.ticket.spaceFlight.ship.totalSeats;
+        return 1;
+      }
+      
     } else
       return 0;
   }
@@ -115,7 +117,7 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
       this.columnsOfSeats[i].seats = new Array<Seat>(this.numberOfSeatsInARow);
       for (let j = 0; j < this.numberOfSeatsInARow; j++) {
         this.columnsOfSeats[i].seats[j] = new Seat();
-        this.columnsOfSeats[i].seats[j].seatCode = this.generateSeatCode(j);
+        this.columnsOfSeats[i].seats[j].seatCode = this.generateSeatCodeLetter(j);
         this.columnsOfSeats[i].seats[j].seatNo = i;
       }
     }
@@ -123,22 +125,15 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
 
   //set the already booked seats to the colour of dark grey
   assignReservedSeats() {
-    //need to get the reserved seats from api first
     this.seatService.getReservedSeats(this.ticket.spaceFlight.flightNumber).subscribe((seats) => {
-      for (let seat of seats) { //for each reservedseat check each columns every seat
-        this.columnsOfSeats.forEach(column => {
-          for (let i = 0; i < column.seats.length; i++) {
-            if (column.seats[i].seatNo === seat.seatNo && column.seats[i].seatCode === seat.seatCode) {
-              this.setSeatColor('grey', seat.seatNo, i);
-            }
-          }
-        });
+      for (let seat of seats) {
+        this.setSeatColor('grey', seat.seatNo, this.generateSeatCodeNumber(seat.seatCode));
       }
     });
   }
 
   //generate a seat letter... mostly to look official
-  generateSeatCode(seatNo: number): string {
+  generateSeatCodeLetter(seatNo: number): string {
     switch (seatNo) {
       case 0:
         return 'A';
@@ -155,6 +150,22 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
     }
   }
 
+  //generate a seat number
+  generateSeatCodeNumber(seatNo: string): number {
+    switch (seatNo) {
+      case 'A':
+        return 0;
+      case 'B':
+        return 1;
+      case 'C':
+        return 2;
+      case 'D':
+        return 3;
+      case 'E':
+        return 4;
+    }
+  }
+
   //finalise ticket details and order ticket
   orderTickets() {
     this.ticket.seats = Array.from(this.selectedSeats);
@@ -167,7 +178,7 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
 
   //generate a ticket number
   generateTicketNumber(): string {
-    let number = Math.round((Math.random() * 10000));
+    let number = Math.round((Math.random() * 100000));
     return ('T' + this.ticket.flightNumber + number.toString());
   }
 
@@ -179,5 +190,4 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
       this.router.navigateByUrl('');
     }
   }
-
 }

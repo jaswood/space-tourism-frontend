@@ -1,3 +1,4 @@
+<!-- Only show intro message until auction house is running -->
 <h2>Spaceflight Auction House:</h2>
 <div *ngIf="!startBidding">
     <p>In this auction house you will be bidding for 1 seat! You will then be able to select it after leaving this
@@ -7,9 +8,11 @@
 
     <p><b>Customer Waiting to Bid:</b> {{noOfBidders}}</p>
 
-    <button mat-raised-button (click)="clickStartBidding()">Start Bidding</button>
-    <span *ngIf="(othersReadyToAuction && startBidding == false)">Waiting for other customers to be ready</span>
+    <button mat-raised-button (click)="clickStartBidding()">Start Bidding</button> <br />
+    <p *ngIf="(ready)">Waiting for You</p>
 </div>
+
+<!-- Bidding component of auction house -->
 <div *ngIf="startBidding">
     <h2 *ngIf="showWin">You Win!</h2>
     <p>Highest Bid: {{highestBid}}</p>
