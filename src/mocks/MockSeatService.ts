@@ -15,5 +15,5 @@ export class MockSeatService {
 
     reserveSeat(seats) { };
 
-    unreserveSeat(seat) { };
+    unReserveSeat(seat) { };
 }

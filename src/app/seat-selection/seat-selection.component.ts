@@ -64,8 +64,10 @@ export class SeatSelectionComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    if(this.beingReservedSeatsSub != undefined){
     this.beingReservedSeatsSub.unsubscribe();
     this.unreservedSeatSub.unsubscribe()
+    }
   }
 
   joinAuction() {

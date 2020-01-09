@@ -173,7 +173,7 @@ describe('SeatSelectionComponent', () => {
       });
     });
 
-    afterAll(() => {
+    afterEach(() => {
       seat1.color = 'grey';
       seat2.color = 'grey';
     });
@@ -182,7 +182,7 @@ describe('SeatSelectionComponent', () => {
   describe('setSeatSelect Tests', () => {
     const testCases = [
       { colour: 'grey', columnInTestModel: 0, rowInTestModel: 0, expect: 'grey' },
-      { colour: 'grey', columnInTestModel: 0, rowInTestModel: 1, expect: 'darkgrey' }
+      { colour: 'darkorange', columnInTestModel: 0, rowInTestModel: 1, expect: 'darkgrey' }
     ];
 
     let columns = new SeatColumn();
@@ -200,6 +200,7 @@ describe('SeatSelectionComponent', () => {
 
     testCases.forEach((test, index) => {
       it(`selectSeat assign select with ${test.colour} correctly, expecting ${test.expect} (testCase: ${index + 1})`, () => {
+        columns.seats[test.rowInTestModel].color = test.colour;
         component.selectSeat(columns.seats[test.rowInTestModel], test.columnInTestModel, test.rowInTestModel);
         let colour = columns.seats[test.rowInTestModel].color;
         expect(colour).toEqual(test.expect);
@@ -208,7 +209,7 @@ describe('SeatSelectionComponent', () => {
 
     afterEach(() => {
       seat1.color = 'grey';
-      seat2.color = 'grey';
+      seat2.color = 'darkorange';
     });
   });
 });
