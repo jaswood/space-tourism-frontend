@@ -42,6 +42,13 @@ export class SelectFlightComponent implements OnInit {
       this.ticketNumber = window.history.state.data.ticketNumber;
       this.openBoughtTicket();
     }
+
+    this.selectFlightService.getSpaceFlights().subscribe((flights) => {
+      this.spaceFlights = flights;
+    });
+    this.selectFlightService.getSpaceships().subscribe((ships) => {
+      this.spaceships = this.spaceships;
+    })
   }
 
   destinationOnKey(value: string) {
